@@ -9,6 +9,9 @@
     "react": "15.1.0",
     "react-native": "0.28.0",
     "react-native-looped-carousel": "0.0.12",
+    "react-native-modal-picker": "0.0.15",
+    "react-native-prefix-picker": "^2.0.2",
+    "react-native-prompt": "^0.18.5",
     "react-native-tab-navigator": "^0.3.2"
   }
 }

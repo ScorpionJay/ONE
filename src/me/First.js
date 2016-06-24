@@ -35,16 +35,19 @@ export default class Me extends Component {
         //为什么这里可以取得 props.navigator?请看上文:
         //<Component {...route.params} navigator={navigator} />
         //这里传递了navigator作为props
-            navigator.push({title:'meSecond',id:'meSecond'})
+            navigator.push({title:'设置',id:'meSecond'})
 
 
 
     }
 
-    _image(){
-      // ImagePicker.launchCamera(options, (response)  => {
-      //   // Same code as in above section!
-      // });
+    _favHandler(){
+      Alert.alert('','开发中');
+    }
+
+    _accountHandler(){
+      const { navigator } = this.props;
+      navigator.push({title:'个人信息',id:'account'})
     }
 
 
@@ -59,7 +62,7 @@ export default class Me extends Component {
 
         <ScrollView style={styles.container}>
           
-          <TouchableOpacity style={styles.itemHeader} onPress={this._image}>
+          <TouchableOpacity style={styles.itemHeader} onPress={()=>this._accountHandler()}>
             
               <Image
           source={require("../images/me1.png")}
@@ -74,7 +77,7 @@ export default class Me extends Component {
               </View>
           </TouchableOpacity>
 
-          <View style={styles.item}>
+          <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
               <View style={styles.item1}>
                   <Text >收藏</Text>
               </View>
@@ -82,7 +85,7 @@ export default class Me extends Component {
               <View style={styles.item3}>
                   <Text >></Text>
               </View>
-          </View>
+          </TouchableOpacity>
 
           <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
               <View style={styles.item1}>

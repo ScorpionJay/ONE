@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  Alert
+  Alert,
+  Image
 } from 'react-native';
 
-
-import Me from './Me'
 import ToolBar from '../common/ToolBar'
-export default class Second extends Component {
+export default class Tab extends Component {
 
   constructor(props) {
     super(props);
@@ -19,24 +17,34 @@ export default class Second extends Component {
     this.state = {};
   }
 
-  handler(){
-    console.log(this.props)
-    const { navigator } = this.props
-    navigator.push({title:'third',id:'third'}
-
-    )
-    //Alert.alert('hi','hi');
+   handler(){
+     const { navigator } = this.props;
+     navigator.push({title:'关于',id:'about'})
   }
 
   render() {
     return (
-      <View>
+      <View  style={styles.container}>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
-          <TouchableOpacity onPress={this.handler.bind(this)}>
-            <Text>Me second</Text>
-          </TouchableOpacity>
-      </View>
+          <View style={styles.container}>
 
+            <TouchableOpacity style={styles.item} onPress={this.handler.bind(this)}>
+                <Text style={styles.item1}>关于</Text>
+                <Text style={styles.item3}>></Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.item} onPress={()=>Alert.alert('','开发中')}>
+                <Text style={styles.item1}>退出</Text>
+                <Text style={styles.item3}>></Text>
+            </TouchableOpacity>
+             
+        </View>
+
+
+      
+
+      </View>
+      
     );
   }
 }
@@ -44,19 +52,29 @@ export default class Second extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  item: {
+    marginTop:10,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    height:30,
     justifyContent: 'center',
+  },
+  item1: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft:10,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  item3: {
+    alignItems:'flex-end',
+    marginRight:10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  thumbnail :{
+    width: 30,
+    height: 30,
   },
+
 });
 

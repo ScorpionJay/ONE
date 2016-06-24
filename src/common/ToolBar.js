@@ -58,12 +58,11 @@ export default class ToolBar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
     flexDirection: 'row',
     backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
-    height:50,
+    height:40,
   },
   tabLeft: {
     flex:1,
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
 
     backgroundColor: 'red',
     justifyContent: 'center',
-    height:50,
+    height:40,
   },
   tabCenter2:{
     alignSelf: 'center',

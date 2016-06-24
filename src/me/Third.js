@@ -24,12 +24,12 @@ export default class Tab extends Component {
 
   render() {
     return (
-      <View>
+      <View  style={styles.container}>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
-          <TouchableOpacity onPress={this.handler.bind(this)}>
+          <View  style={styles.container}>
        
-          <Text>me third</Text>
-      </TouchableOpacity>
+            <Text>关于</Text>
+        </View>
       </View>
       
     );
@@ -39,19 +39,29 @@ export default class Tab extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  item: {
+    marginTop:10,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    height:30,
     justifyContent: 'center',
+  },
+  item1: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft:10,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  item3: {
+    alignItems:'flex-end',
+    marginRight:10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  thumbnail :{
+    width: 30,
+    height: 30,
   },
+
 });
 

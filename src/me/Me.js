@@ -12,6 +12,7 @@ import Second from './Second'
 import First from './First'
 import Third from './Third'
 import About from './About'
+import Account from './Account'
 import ToolBar from '../common/ToolBar'
 export default class Me extends Component {
 
@@ -45,6 +46,14 @@ export default class Me extends Component {
       }else if(route.id === 'third'){
        return (
           <Third navigator={navigator} route={route}/>
+          )
+      }else if(route.id === 'account'){
+       return (
+          <Account navigator={navigator} route={route}/>
+          )
+      }else if(route.id === 'about'){
+       return (
+          <About navigator={navigator} route={route}/>
           )
       }
           
