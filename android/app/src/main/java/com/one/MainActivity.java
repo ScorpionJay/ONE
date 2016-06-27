@@ -1,11 +1,17 @@
 package com.one;
 
 import com.facebook.react.ReactActivity;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.imagepicker.ImagePickerPackage; // import package
+import com.oblador.vectoricons.VectorIconsPackage;
+
 
 public class MainActivity extends ReactActivity {
 
@@ -34,7 +40,11 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new MainReactPackage()
+            new MainReactPackage(),
+            new RNDeviceInfo(),
+            new VectorIconsPackage(),
+            new ImagePickerPackage() // Add package
+            // , new VectorIconsPackage()
         );
     }
 }

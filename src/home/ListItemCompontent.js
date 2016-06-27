@@ -9,6 +9,8 @@ import {
   ScrollView
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 export default class ListItemCompontent extends Component{
 
 	constructor(props) {
@@ -38,7 +40,9 @@ export default class ListItemCompontent extends Component{
 							<Text style={styles.nameTitle}>{name}</Text>
 						</View>
 						<View style={styles.desc}>
-							<Text style={styles.descTitle}> > </Text>
+							<Text style={styles.descTitle}>
+								<Icon name="angle-right" size={25} color="#aaa" />
+							</Text>
 						</View>
 					</View>
 	            </TouchableOpacity>
@@ -66,8 +70,10 @@ const styles = StyleSheet.create({
 	desc:{
 		alignItems: 'flex-end',
 		flex: 1,
+		justifyContent: 'center',
 	},
 	descTitle:{
 		fontSize:25,
+
 	}
 })

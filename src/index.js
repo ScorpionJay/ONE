@@ -13,12 +13,16 @@ import TabNavigator from 'react-native-tab-navigator'
 import Home from './home/Home'
 import Me from './me/Me'
 
+import Config from './Config'
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 export default class Test extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab:'Home'
+      selectedTab:Config.initTab
     };
   }
 
@@ -28,16 +32,16 @@ export default class Test extends Component {
         <TabNavigator.Item
           selected={this.state.selectedTab === 'Home'}
           title="首页"
-          renderIcon={() => <Image source={require('./images/star2.png')} style= {styles.img}/>}
-          renderSelectedIcon={() => <Image source={require('./images/star1.png')} style= {styles.img}/>}
+          renderIcon={() => <Icon name="star-o" size={25} color="#aaa" />}
+          renderSelectedIcon={() => <Icon name="star" size={25} color="#238CFE" />}
           onPress={() => this.setState({ selectedTab: 'Home' })}>
           <Home/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.selectedTab === 'Me'}
           title="我"
-          renderIcon={() => <Image source={require('./images/me2.png')} style= {styles.img}/>}
-          renderSelectedIcon={() => <Image source={require('./images/me1.png')} style= {styles.img}/>}
+          renderIcon={() => <Icon name="user" size={25} color="#aaa" />}
+          renderSelectedIcon={() => <Icon name="user" size={25} color="#238CFE" />}
           onPress={() => this.setState({ selectedTab: 'Me' })}>
            <Me />
         </TabNavigator.Item>
