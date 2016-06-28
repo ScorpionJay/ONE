@@ -30,9 +30,6 @@ export default class Find extends Component {
 
      _navigator = navigator;
     
-
-       
-          
       if(route.id === 'main'){
           return (
              <First navigator={navigator} route={route}/>

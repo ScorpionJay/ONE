@@ -14,6 +14,7 @@ import Third from './Third'
 import About from './About'
 import Account from './Account'
 import ToolBar from '../common/ToolBar'
+import Login from '../Login'
 export default class Me extends Component {
 
   constructor(props) {
@@ -54,6 +55,10 @@ export default class Me extends Component {
       }else if(route.id === 'about'){
        return (
           <About navigator={navigator} route={route}/>
+          )
+      }else if(route.id === 'login'){
+       return (
+          <Login navigator={navigator} route={route}/>
           )
       }
           

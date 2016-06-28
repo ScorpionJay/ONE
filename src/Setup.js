@@ -17,6 +17,8 @@ import Splash from './Splash'
 import Login from './Login'
 import Main from './Main'
 
+import Storage from 'react-native-storage'
+
 export default class Setup extends Component {
 
   _renderScene(route, navigator){

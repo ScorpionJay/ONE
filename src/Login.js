@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 
 import Main from './Main'
-
-//const REQUEST_URL = './json/data.json';
-
-  const REQUEST_URL = 'https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json';
+import Config from './Config'
 
 export default class Login extends Component {
 
@@ -25,44 +22,50 @@ export default class Login extends Component {
       password:'',
       data:null,
     };
-
-     // this.props.navigator.push({
-     //          name: '首页',
-     //          component: Main
-     //        })
   }
-
-
-        
 
   login(){
     let {username,password} = this.state
     //Alert.alert("提示", `username: ${username} ,password:${password}`)
-
+    // 需要检验
     this.fetchData();
   }
 
   // 获取数据方法
     fetchData() {
-      fetch(REQUEST_URL)
-        .then((response) => response.json())
-         .then((responseData) => {
-          this.setState({
-            data: responseData,
-           });
+      fetch(Config.loginUrl,{
+        headers: {
+          'Username': this.state.username,
+          'Password': this.state.password
+        },
+        method: 'POST'
+      })
+      .then((response) => {
+            const authToken = response.headers.get("Auth-Token");
+            if(authToken){
+              // Alert.alert('',authToken);
+              storage.save({
+                key: 'loginState',  //注意:请不要在key中使用_下划线符号!
+                rawData: { 
+                  from: 'some other site',
+                  userid: this.state.username,
+                  token: authToken
+                },
+                // 如果不指定过期时间，则会使用defaultExpires参数
+                // 如果设为null，则永不过期
+                expires: 1000 * 3600
+              });  
 
-           Alert.alert('',JSON.stringify(responseData));
+              this.props.navigator.push({
+                    name: '首页',
+                    id: 'main'
+              })
 
-          // 判断
-          if(true){
-            this.props.navigator.push({
-              name: '首页',
-              id:'main'
-            })
-          }  
-
-         })
-        .done();
+            }else{
+              Alert.alert('','帐号或密码错误');
+            }
+      })
+      .done();
     }
 
   render() {
@@ -90,6 +93,9 @@ export default class Login extends Component {
 
           <View style={styles.options}>
               <Text style={styles.unlogin}>Can't login?</Text>
+              <TouchableOpacity onPress={()=>{this.props.navigator.push({id:'main'})}}>
+                <Text style={styles.unlogin}>Skip</Text>
+              </TouchableOpacity>
               <Text style={styles.newUser}>Register</Text>
           </View>
 

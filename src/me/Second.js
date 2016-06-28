@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 import ToolBar from '../common/ToolBar'
+import Config from '../Config'
+
 export default class Tab extends Component {
 
   constructor(props) {
@@ -22,6 +24,15 @@ export default class Tab extends Component {
      navigator.push({title:'关于',id:'about'})
   }
 
+
+  _logout(){
+    storage.remove({
+        key: 'loginState'
+    });
+    Alert.alert('','logout')
+    this.props.navigator.push({id:'main'})
+  }
+
   render() {
     return (
       <View  style={styles.container}>
@@ -33,7 +44,7 @@ export default class Tab extends Component {
                 <Text style={styles.item3}>></Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.item} onPress={()=>Alert.alert('','开发中')}>
+            <TouchableOpacity style={styles.item} onPress={this._logout.bind(this)}>
                 <Text style={styles.item1}>退出</Text>
                 <Text style={styles.item3}>></Text>
             </TouchableOpacity>

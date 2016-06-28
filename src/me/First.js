@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
@@ -11,21 +11,42 @@ import {
   ListView,
   Image,
   ScrollView
-} from 'react-native';
+} from 'react-native'
 
 import Setting from './About'
 import ToolBar from '../common/ToolBar'
 
-//import ImagePicker from 'react-native-image-picker'
+import Config from '../Config'
 
 export default class Me extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      username:''
+    };
   }
 
+  componentDidMount() {
+    storage.load({
+      key: 'loginState',
+      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
+      autoSync: true,
+      // syncInBackground(默认为true)意味着如果数据过期，
+      // 在调用同步方法的同时先返回已经过期的数据。
+      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
+      syncInBackground: true
+      }).then(ret => {
+        //如果找到数据，则在then方法中返回
+        console.log(ret.userid);
+        this.setState({username:ret.userid})
+      }).catch(err => {
+        //如果没有找到数据且没有同步方法，
+        //或者有其他异常，则在catch中返回
+        console.warn(err);
+      })
+  }
 
   
 
@@ -50,58 +71,123 @@ export default class Me extends Component {
       navigator.push({title:'个人信息',id:'account'})
     }
 
+    _login(){
+      const { navigator } = this.props;
+      navigator.push({title:'登录',id:'login'})
+    }
+
+    _renderScene(){
+      // 获取某个key下的所有数据
+      if(this.state.username !== ''){
+        return(
+                    <View>
+
+                 <ToolBar navigator={this.props.navigator} route={this.props.route}/>
+
+                  
+
+
+                  <ScrollView style={styles.container}>
+                    
+                    <TouchableOpacity style={styles.itemHeader} onPress={()=>this._accountHandler()}>
+                      
+                        <Image
+                    source={require("../images/me1.png")}
+                    style={styles.thumbnail}
+                  />
+                      
+                        <View style={styles.item2}>
+                            <Text >{this.state.username}</Text>
+                        </View>
+                        <View style={styles.item3}>
+                            <Text >></Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
+                        <View style={styles.item1}>
+                            <Text >收藏</Text>
+                        </View>
+
+                        <View style={styles.item3}>
+                            <Text >></Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
+                        <View style={styles.item1}>
+                            <Text >设置</Text>
+                        </View>
+
+                        <View style={styles.item3}>
+                            <Text >></Text>
+                        </View>
+                    </TouchableOpacity>
+                    
+                    
+                  
+                  
+                </ScrollView>
+                </View>
+      )
+      }else{
+                  return(
+                    <View>
+
+                 <ToolBar navigator={this.props.navigator} route={this.props.route}/>
+
+                  
+
+
+                  <ScrollView style={styles.container}>
+                    
+                    <TouchableOpacity style={styles.itemHeader} onPress={this._login.bind(this)}>
+                      
+                        <Image
+                    source={require("../images/me1.png")}
+                    style={styles.thumbnail}
+                  />
+                      
+                        <View style={styles.item2}>
+                            <Text >登录</Text>
+                        </View>
+                        <View style={styles.item3}>
+                            <Text >></Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
+                        <View style={styles.item1}>
+                            <Text >收藏</Text>
+                        </View>
+
+                        <View style={styles.item3}>
+                            <Text >></Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
+                        <View style={styles.item1}>
+                            <Text >设置</Text>
+                        </View>
+
+                        <View style={styles.item3}>
+                            <Text >></Text>
+                        </View>
+                    </TouchableOpacity>
+                    
+                    
+                  
+                  
+                </ScrollView>
+                </View>
+          )
+      }
+    }
 
   render() {
     return (
-      <View>
-
-       <ToolBar navigator={this.props.navigator} route={this.props.route}/>
-
-        
-
-
-        <ScrollView style={styles.container}>
-          
-          <TouchableOpacity style={styles.itemHeader} onPress={()=>this._accountHandler()}>
-            
-              <Image
-          source={require("../images/me1.png")}
-          style={styles.thumbnail}
-        />
-            
-              <View style={styles.item2}>
-                  <Text >Jay</Text>
-              </View>
-              <View style={styles.item3}>
-                  <Text >></Text>
-              </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
-              <View style={styles.item1}>
-                  <Text >收藏</Text>
-              </View>
-
-              <View style={styles.item3}>
-                  <Text >></Text>
-              </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
-              <View style={styles.item1}>
-                  <Text >设置</Text>
-              </View>
-
-              <View style={styles.item3}>
-                  <Text >></Text>
-              </View>
-          </TouchableOpacity>
-          
-          
-        
-        
-      </ScrollView>
-      </View>
+      this._renderScene()
     );
   }
 }
