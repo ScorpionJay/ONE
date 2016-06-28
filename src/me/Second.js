@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import ToolBar from '../common/ToolBar'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import Config from '../Config'
 
 export default class Tab extends Component {
@@ -39,16 +40,27 @@ export default class Tab extends Component {
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <View style={styles.container}>
 
+
             <TouchableOpacity style={styles.item} onPress={this.handler.bind(this)}>
-                <Text style={styles.item1}>关于</Text>
-                <Text style={styles.item3}>></Text>
+              <View style={styles.item1}>
+                <Text >关于</Text>
+              </View>
+
+              <View style={styles.item3}>
+                <Icon name="angle-right" size={25} color="#aaa" />
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.item} onPress={this._logout.bind(this)}>
-                <Text style={styles.item1}>退出</Text>
-                <Text style={styles.item3}>></Text>
+              <View style={styles.item1}>
+                <Text >退出</Text>
+              </View>
+
+              <View style={styles.item3}>
+                <Icon name="angle-right" size={25} color="#aaa" />
+              </View>
             </TouchableOpacity>
-             
+
         </View>
 
 
@@ -68,18 +80,20 @@ const styles = StyleSheet.create({
     marginTop:10,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    height:30,
+    height:45,
     justifyContent: 'center',
+
   },
   item1: {
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
     marginLeft:10,
-    alignItems: 'center',
   },
   item3: {
+    flex: 1,
     alignItems:'flex-end',
+    justifyContent: 'center',
     marginRight:10,
   },
   thumbnail :{

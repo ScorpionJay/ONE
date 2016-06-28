@@ -12,6 +12,7 @@ import {
   Image,
   ScrollView
 } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Setting from './About'
 import ToolBar from '../common/ToolBar'
@@ -84,23 +85,19 @@ export default class Me extends Component {
 
                  <ToolBar navigator={this.props.navigator} route={this.props.route}/>
 
-                  
-
-
                   <ScrollView style={styles.container}>
                     
                     <TouchableOpacity style={styles.itemHeader} onPress={()=>this._accountHandler()}>
                       
                         <Image
-                    source={require("../images/me1.png")}
-                    style={styles.thumbnail}
-                  />
-                      
+                            source={require("../images/me1.png")}
+                            style={styles.thumbnail}
+                          />
                         <View style={styles.item2}>
                             <Text >{this.state.username}</Text>
                         </View>
                         <View style={styles.item3}>
-                            <Text >></Text>
+                            <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
 
@@ -110,7 +107,7 @@ export default class Me extends Component {
                         </View>
 
                         <View style={styles.item3}>
-                            <Text >></Text>
+                            <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
 
@@ -120,13 +117,9 @@ export default class Me extends Component {
                         </View>
 
                         <View style={styles.item3}>
-                            <Text >></Text>
+                            <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
-                    
-                    
-                  
-                  
                 </ScrollView>
                 </View>
       )
@@ -144,15 +137,14 @@ export default class Me extends Component {
                     <TouchableOpacity style={styles.itemHeader} onPress={this._login.bind(this)}>
                       
                         <Image
-                    source={require("../images/me1.png")}
-                    style={styles.thumbnail}
-                  />
-                      
+                            source={require("../images/me1.png")}
+                            style={styles.thumbnail}
+                          />
                         <View style={styles.item2}>
                             <Text >登录</Text>
                         </View>
                         <View style={styles.item3}>
-                            <Text >></Text>
+                            <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
 
@@ -162,7 +154,7 @@ export default class Me extends Component {
                         </View>
 
                         <View style={styles.item3}>
-                            <Text >></Text>
+                            <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
 
@@ -172,13 +164,11 @@ export default class Me extends Component {
                         </View>
 
                         <View style={styles.item3}>
-                            <Text >></Text>
+                            <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
+
                     </TouchableOpacity>
-                    
-                    
-                  
-                  
+
                 </ScrollView>
                 </View>
           )
@@ -193,84 +183,86 @@ export default class Me extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eee',
-  },
-  thumbnail :{
-    width: 60,
-    height: 60,
-  },
-  itemHeader: {
-    height: 60,
-     marginTop:10,
-    flex:1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-  },
-  item: {
-    marginTop:10,
-    flex:1,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    height:30,
-    justifyContent: 'center',
-  },
-  item1: {
-    flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    marginLeft:10,
-  },
-  item2: {
-    flex: 1,
-    marginLeft:20,
-    justifyContent: 'center',
-  },
-  item3: {
-    flex: 1,
-    alignItems:'flex-end',
-    justifyContent: 'center',
-    marginRight:10,
-  },
-  toolbar: {
-    backgroundColor: '#03A9F4',
-    height: 56,
-    elevation: 5
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#eee',
+    },
+    thumbnail :{
+        width: 60,
+        height: 60,
+        marginTop:10,
+    },
+    itemHeader: {
+        height: 80,
+        flex:1,
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+    },
+    item: {
+        marginTop:10,
+        flex:1,
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        height:45,
+        justifyContent: 'center',
 
-  btn: {
-    backgroundColor: "#666",
-    height: 40,
-    borderRadius: 8,
-    marginLeft:10,
-    marginRight:10,
-    marginTop:30,      
-    justifyContent: 'center',
-  },
-  btnText: {
-    textAlign: 'center',
-    color: '#fff'
-  },
-  options: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      marginTop:30
-  },
-  unlogin: {
-      color: '#63B8FF',
-      marginLeft: 10
-  },
-  newUser: {
-      flex: 1,
-      alignItems: 'flex-end',
-      flexDirection: 'row',
-      textAlign: 'right',
-      marginRight: 10,
-      color: '#63B8FF'
-  }
+    },
+    item1: {
+        flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginLeft:10,
+    },
+    item3: {
+        flex: 1,
+        alignItems:'flex-end',
+        justifyContent: 'center',
+        marginRight:10,
+    },
+    item2: {
+        flex: 1,
+        marginLeft:20,
+        justifyContent: 'center',
+    },
+
+    toolbar: {
+        backgroundColor: '#03A9F4',
+        height: 56,
+        elevation: 5
+    },
+
+    btn: {
+        backgroundColor: "#666",
+        height: 40,
+        borderRadius: 8,
+        marginLeft:10,
+        marginRight:10,
+        marginTop:30,
+        justifyContent: 'center',
+    },
+    btnText: {
+        textAlign: 'center',
+        color: '#fff'
+    },
+    options: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        marginTop:30
+    },
+    unlogin: {
+        color: '#63B8FF',
+        marginLeft: 10
+    },
+    newUser: {
+        flex: 1,
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+        textAlign: 'right',
+        marginRight: 10,
+        color: '#63B8FF'
+    }
 });
 
 

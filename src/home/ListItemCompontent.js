@@ -59,13 +59,16 @@ const styles = StyleSheet.create({
 		backgroundColor:'#fff',
 		marginTop:10,
 		padding:5,
+		height:45,
 	},
 	name:{
 		alignItems: 'flex-start',
 		flex: 1,
+		marginTop:2,
 	},
 	nameTitle:{
-		fontSize:25,
+		marginTop:2,
+		fontSize:15,
 	},
 	desc:{
 		alignItems: 'flex-end',

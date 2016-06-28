@@ -140,7 +140,6 @@ export default class Me extends Component {
                         <Text style={styles.item1}>性别</Text>
                         <Text style={styles.item3}>{this.state.textInputValue}</Text>
                     </View>
-                    
                 </ModalPicker>
 
         </View>
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
     marginTop:10,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    height:30,
+    height:45,
     justifyContent: 'center',
   },
   item1: {
@@ -183,13 +182,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   item3: {
-    alignItems:'flex-end',
-    marginRight:10,
+      alignItems:'flex-end',
+      marginRight:10,
+      justifyContent: 'center',
+      marginTop:10,
+
   },
   thumbnail :{
-    width: 30,
-    height: 30,
-    marginRight:10,
+      width: 30,
+      height: 30,
+      marginRight:10,
+      justifyContent: 'center',
+      marginTop:7,
   },
 
 });
