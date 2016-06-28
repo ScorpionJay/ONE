@@ -45,12 +45,10 @@ export default class ListCompontent extends Component{
 	  }
 
 	render() {
-
-
 		return (
 			<ScrollView style={styles.container}>
 				{
-					this.state.data.map( item => <Item data={item} navigator={this.props.navigator} route={this.props.route}/> )
+					this.state.data.map( item => <Item data={item} key={item.id} navigator={this.props.navigator} route={this.props.route}/> )
 				}
 			</ScrollView>
 		);

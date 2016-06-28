@@ -1,3 +1,3 @@
 import {AppRegistry} from 'react-native';
-import App from './src'
-AppRegistry.registerComponent('ONE', () => App);
+import Setup from './src/Setup'
+AppRegistry.registerComponent('ONE', () => Setup);
