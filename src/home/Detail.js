@@ -10,10 +10,9 @@ import {
 
 import ToolBar from '../common/ToolBar'
 
-// 定义url常量
 const REQUEST_URL = 'https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json';
 
-export default class Second extends Component {
+export default class Detail extends Component {
 
   constructor(props) {
     super(props);
@@ -32,9 +31,7 @@ export default class Second extends Component {
     console.log(this.props)
     const { navigator } = this.props
     navigator.push({title:'third',id:'third'}
-
     )
-    //Alert.alert('hi','hi');
   }
 
   // 获取数据方法
@@ -42,8 +39,6 @@ export default class Second extends Component {
       fetch(REQUEST_URL)
         .then((response) => response.json())
         .then((responseData) => {
-
-
           responseData.map(item => {
              if(item.id === this.state.id){
                 this.setState({

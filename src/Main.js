@@ -32,16 +32,16 @@ export default class Test extends Component {
           title="首页"
           renderIcon={() => <Icon name="star-o" size={25} color="#aaa" />}
           renderSelectedIcon={() => <Icon name="star" size={25} color="#238CFE" />}
-          onPress={() => this.setState({ selectedTab: 'Home' })}>
-          <Home/>
+          onPress={() => {this.setState({ selectedTab: 'Home' });this.props.route.title='首页'}}>
+          <Home navigator={this.props.navigator} route={this.props.route}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           selected={this.state.selectedTab === 'Me'}
           title="我"
           renderIcon={() => <Icon name="user" size={25} color="#aaa" />}
           renderSelectedIcon={() => <Icon name="user" size={25} color="#238CFE" />}
-          onPress={() => this.setState({ selectedTab: 'Me' })}>
-           <Me />
+          onPress={() => {this.setState({ selectedTab: 'Me' });this.props.route.title='我' } }>
+           <Me navigator={this.props.navigator} route={this.props.route}/>
         </TabNavigator.Item>
       </TabNavigator>
     );

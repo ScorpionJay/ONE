@@ -68,10 +68,8 @@ export default class Me extends Component {
       avatarSource:require("../images/me1.png")
     };
 
-    Alert.alert('',DeviceInfo.getUniqueID() + DeviceInfo.getSystemName() + DeviceInfo.getSystemVersion() );
+    //Alert.alert('',DeviceInfo.getUniqueID() + DeviceInfo.getSystemName() + DeviceInfo.getSystemVersion() );
   }
-
-
 
   imageHandler(){
     ImagePicker.showImagePicker(options, (response) => {

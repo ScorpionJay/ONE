@@ -16,7 +16,6 @@ export default class Tab extends Component {
 
   constructor(props) {
     super(props);
-  
     this.state = {};
   }
 
@@ -27,11 +26,11 @@ export default class Tab extends Component {
 
 
   _logout(){
+    // 调用后台
     storage.remove({
         key: 'loginState'
     });
-    Alert.alert('','logout')
-    this.props.navigator.push({id:'main'})
+    this.props.navigator.push({id:'main','title':'首页'})
   }
 
   render() {
@@ -39,7 +38,6 @@ export default class Tab extends Component {
       <View  style={styles.container}>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <View style={styles.container}>
-
 
             <TouchableOpacity style={styles.item} onPress={this.handler.bind(this)}>
               <View style={styles.item1}>
@@ -60,14 +58,8 @@ export default class Tab extends Component {
                 <Icon name="angle-right" size={25} color="#aaa" />
               </View>
             </TouchableOpacity>
-
         </View>
-
-
-      
-
       </View>
-      
     );
   }
 }

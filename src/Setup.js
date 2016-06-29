@@ -17,6 +17,16 @@ import Splash from './Splash'
 import Login from './Login'
 import Main from './Main'
 
+import Home from './home/Home'
+import Detail from './home/Detail'
+import Third from './home/Third'
+
+
+import Me from './me/Me'
+import Account from './me/Account'
+import Setting from './me/Setting'
+import About from './me/About'
+
 import Storage from 'react-native-storage'
 
 export default class Setup extends Component {
@@ -24,14 +34,39 @@ export default class Setup extends Component {
   _renderScene(route, navigator){
     switch(route.id){
       case 'splash':
-            return <Splash navigator={navigator} {...route.params}/>
+            return <Splash navigator={navigator} route={route}/>
             break;
       case 'login':
-            return <Login navigator={navigator} {...route.params}/>
+            return <Login navigator={navigator} route={route}/>
             break;
       case 'main':
-            return <Main navigator={navigator} {...route.params}/>
+            return <Main navigator={navigator} route={route}/>
             break;
+            
+      // home
+      case 'home':
+            return <Home navigator={navigator} route={route}/>
+            break;
+      case  'detail':
+            return <Detail navigator={navigator} route={route}/>
+            break;
+      case  'third':
+            return <Third navigator={navigator} route={route}/>
+            break;
+
+      // me
+      case  'me':
+            return <Me navigator={navigator} route={route}/>
+            break;
+      case  'account':
+            return <Account navigator={navigator} route={route}/>
+            break;
+      case  'about':
+            return <About navigator={navigator} route={route}/>
+            break;
+      case  'setting':
+            return <Setting navigator={navigator} route={route}/>
+            break;    
     }
   }
 

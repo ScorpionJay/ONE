@@ -19,5 +19,5 @@ global.storage = storage;
 
 export default {
   initTab:'Home',
-  loginUrl:'http://5f5c008c.ngrok.io'
+  loginUrl:'http://192.16.2.65:8888'
 };

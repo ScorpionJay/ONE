@@ -57,7 +57,7 @@ export default class Login extends Component {
               });  
 
               this.props.navigator.push({
-                    name: '首页',
+                    title: '首页',
                     id: 'main'
               })
 
@@ -93,7 +93,7 @@ export default class Login extends Component {
 
           <View style={styles.options}>
               <Text style={styles.unlogin}>Can't login?</Text>
-              <TouchableOpacity onPress={()=>{this.props.navigator.push({id:'main'})}}>
+              <TouchableOpacity onPress={()=>{this.props.navigator.push({id:'main', title: '首页',})}}>
                 <Text style={styles.unlogin}>Skip</Text>
               </TouchableOpacity>
               <Text style={styles.newUser}>Register</Text>

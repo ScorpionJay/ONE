@@ -19,7 +19,6 @@ export default class Tab extends Component {
    handler(){
     console.log(this.props)
     const { navigator } = this.props
-    //navigator.pop()
   }
 
   render() {
@@ -27,11 +26,9 @@ export default class Tab extends Component {
       <View>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <TouchableOpacity onPress={this.handler.bind(this)}>
-       
-          <Text>third</Text>
-      </TouchableOpacity>
+            <Text>hello world</Text>
+          </TouchableOpacity>
       </View>
-      
     );
   }
 }

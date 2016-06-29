@@ -15,15 +15,14 @@ export default class ListItemCompontent extends Component{
 
 	constructor(props) {
 	  super(props);
-	
 	  this.state = {};
 	}
 
 	handler(){
 		const {navigator,router} = this.props
 		navigator.push({
-			title:'Detail',
-			id:'second',
+			title:'详情',
+			id:'detail',
 			params: {
                 id: this.props.data.id
             }

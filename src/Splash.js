@@ -9,9 +9,6 @@ import {
   Image,
 } from 'react-native';
 
-import Login from './Login'
-import Main from './Main'
-
 export default class Splash extends Component {
 
   constructor(props) {
@@ -37,7 +34,7 @@ export default class Splash extends Component {
         console.log(ret.userid);
         // Alert.alert('',ret.userid);
         this.props.navigator.push({
-                    name: '首页',
+                    title: '首页',
                     id: 'main'
                   })
       }).catch(err => {
@@ -46,7 +43,8 @@ export default class Splash extends Component {
         console.warn(err);
 
         navigator.push({
-          id: 'login'
+          id: 'login',
+          title: '登录'
         })
 
       })
