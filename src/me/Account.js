@@ -10,7 +10,8 @@ import {
   Alert,
   ListView,
   Image,
-  ScrollView
+  ScrollView,
+  ToastAndroid
 } from 'react-native';
 
 import Setting from './About'
@@ -25,6 +26,8 @@ import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import DeviceInfo from 'react-native-device-info'
+
+import Config from '../Config'
 
 const data = [
     { key: 0, label: '男' },
@@ -64,11 +67,69 @@ export default class Me extends Component {
     this.state = {
       textInputValue: '男',
       promptVisible: false,
-      say:'',
-      avatarSource:require("../images/me1.png")
+      sign:'',
+      avatarSource:require("../images/me1.png"),
+      username:'',
+      token:''
     };
 
     //Alert.alert('',DeviceInfo.getUniqueID() + DeviceInfo.getSystemName() + DeviceInfo.getSystemVersion() );
+  }
+
+
+  componentDidMount() {
+
+      storage.load({
+        key: 'loginState',
+        autoSync: true,
+        syncInBackground: true
+        }).then(ret => {
+            console.log(ret.userid);
+            this.setState({username:ret.userid,token:ret.token})
+            this._fetch()
+          }).catch(err => {
+        })
+  }
+
+  _fetch(){
+    const {username} = this.state
+    fetch(Config.accountUrl + '/' +username,{
+        headers: {
+          'Auth-Token': this.state.token,
+        },
+      })
+      .then((response) => response.json())
+      .then((responseData) => {
+           //Alert.alert('',JSON.stringify(responseData));
+
+           if(responseData.status === 401){
+              // token过期 重新登录
+              ToastAndroid.show('帐号过期，重新登录', ToastAndroid.SHORT)
+
+              this.props.navigator.push(
+                {
+                  id:'login',
+                  title:'登录',
+                  params: {
+                    username: username
+                  }
+                }
+              )
+           }
+
+           if(responseData.code === 0){
+              let obj = responseData.obj
+
+              this.setState({
+                username: obj.username,
+                sign: obj.sign
+              })
+
+           }else{
+              console.log('error');
+           }
+      })
+      .done();
   }
 
   imageHandler(){
@@ -117,7 +178,7 @@ export default class Me extends Component {
 
             <View style={styles.item}>
                 <Text style={styles.item1}>帐号</Text>
-                <Text style={styles.item3}>one123</Text>
+                <Text style={styles.item3}>{this.state.username}</Text>
             </View>
 
             <View style={styles.item}>
@@ -127,7 +188,7 @@ export default class Me extends Component {
 
             <TouchableOpacity style={styles.item}  onPress={() => this.setState({ promptVisible: true })}>
                 <Text style={styles.item1}>签名</Text>
-                <Text style={styles.item3}>{this.state.say}</Text>
+                <Text style={styles.item3}>{this.state.sign}</Text>
             </TouchableOpacity>
 
              <ModalPicker 
@@ -152,7 +213,7 @@ export default class Me extends Component {
           }) }
           onSubmit={ (value) => this.setState({
             promptVisible: false,
-            say: value
+            sign: value
           }) }/>
       
 

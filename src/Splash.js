@@ -20,7 +20,7 @@ export default class Splash extends Component {
     const {navigator} = this.props
 
 
-    // 登录过则免登录，直接跳主页
+    // 登录过则免登录，直接跳主页 ??? 自动登录
     storage.load({
       key: 'loginState',
       // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法

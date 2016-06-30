@@ -21,5 +21,6 @@ const serviceUrl = 'http://192.16.2.65:8888/'
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
-  registerUrl: serviceUrl + 'register'
+  registerUrl: serviceUrl + 'register',
+  accountUrl: serviceUrl + 'account'
 };
