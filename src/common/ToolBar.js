@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  Navigator,
   TouchableOpacity,
   Alert,
-  Image
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class ToolBar extends Component {
 
@@ -20,8 +17,7 @@ export default class ToolBar extends Component {
 
   handle(){
     const { navigator ,route } = this.props
-    //Alert.alert('1','1' + route.id);
-    if(route.id !== 'main'){
+    if(route.id !== 'main' && route.id !== 'login'){
       navigator.pop()
     }
   }
@@ -29,19 +25,17 @@ export default class ToolBar extends Component {
   render() {
 
     const {route} = this.props
-
-
-
-      if( route.id !== 'main'){
+      if( route.id !== 'main' && route.id !== 'login'){
         return(
            <View style={styles.container}>
               <TouchableOpacity onPress={this.handle.bind(this)} style= {styles.tabLeft}>
-                  <Image source={require('../images/back.png')} style= {styles.img}/>
+                  <Icon name="angle-left" size={30} color="#fff" />
                   <Text style= {styles.text}>返回</Text>
-                 
               </TouchableOpacity>
               <View style= {styles.tabCenter}>
                 <Text style= {styles.text}>{route.title}</Text>
+              </View>
+              <View style= {styles.tabRight}>
               </View>
           </View>
         )
@@ -73,19 +67,18 @@ const styles = StyleSheet.create({
     height:20,
   },
   text: {
-    color: '#fff'
+    color: '#fff',
+    alignSelf: 'center',
+    marginLeft:2,
   },
   tabCenter:{
     flex:1,
-    alignSelf: 'center',
-    justifyContent: 'center',
   },
   tabRight: {
     flex:1,
     justifyContent: 'center',
   },
   container2: {
-
     backgroundColor: 'red',
     justifyContent: 'center',
     height:40,

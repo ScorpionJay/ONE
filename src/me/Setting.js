@@ -50,12 +50,8 @@ export default class Tab extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.item} onPress={this._logout.bind(this)}>
-              <View style={styles.item1}>
-                <Text >退出</Text>
-              </View>
-
-              <View style={styles.item3}>
-                <Icon name="angle-right" size={25} color="#aaa" />
+              <View style={{alignSelf:'center'}}>
+                <Text>退出</Text>
               </View>
             </TouchableOpacity>
         </View>
@@ -74,7 +70,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height:45,
     justifyContent: 'center',
-
   },
   item1: {
     flex: 1,

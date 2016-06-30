@@ -1,26 +1,17 @@
 /**
 * setup
 */
-import React, { Component } from 'react'
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
-  Image,
-  Navigator
-} from 'react-native'
+import React , { Component } from 'react'
+import { Navigator } from 'react-native'
 
 import Splash from './Splash'
 import Login from './Login'
 import Main from './Main'
+import Register from './Register'
 
 import Home from './home/Home'
 import Detail from './home/Detail'
 import Third from './home/Third'
-
 
 import Me from './me/Me'
 import Account from './me/Account'
@@ -39,10 +30,13 @@ export default class Setup extends Component {
       case 'login':
             return <Login navigator={navigator} route={route}/>
             break;
+      case 'register':
+            return <Register navigator={navigator} route={route}/>
+            break;
       case 'main':
             return <Main navigator={navigator} route={route}/>
             break;
-            
+
       // home
       case 'home':
             return <Home navigator={navigator} route={route}/>

@@ -45,7 +45,7 @@ export default class Me extends Component {
       }).catch(err => {
         //如果没有找到数据且没有同步方法，
         //或者有其他异常，则在catch中返回
-        console.warn(err);
+        //console.warn(err);
       })
   }
 
@@ -94,7 +94,8 @@ export default class Me extends Component {
 
                     <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
                         <View style={styles.item1}>
-                            <Text >收藏</Text>
+                          <Icon name="cube" size={20} color="#238CFE" />
+                          <Text style={{marginLeft:5}}>收藏</Text>
                         </View>
 
                         <View style={styles.item3}>
@@ -104,7 +105,8 @@ export default class Me extends Component {
 
                     <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
                         <View style={styles.item1}>
-                            <Text >设置</Text>
+                            <Icon name="gear" size={20} color="#238CFE" />
+                            <Text style={{marginLeft:5}}>设置</Text>
                         </View>
 
                         <View style={styles.item3}>
@@ -141,7 +143,8 @@ export default class Me extends Component {
 
                     <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
                         <View style={styles.item1}>
-                            <Text >收藏</Text>
+                          <Icon name="cube" size={20} color="#238CFE" />
+                          <Text style={{marginLeft:5}}>收藏</Text>
                         </View>
 
                         <View style={styles.item3}>
@@ -151,7 +154,8 @@ export default class Me extends Component {
 
                     <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
                         <View style={styles.item1}>
-                            <Text >设置</Text>
+                            <Icon name="gear" size={20} color="#238CFE" />
+                            <Text style={{marginLeft:5}}>设置</Text>
                         </View>
 
                         <View style={styles.item3}>
@@ -201,9 +205,9 @@ const styles = StyleSheet.create({
     },
     item1: {
         flex: 1,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
+        alignSelf:'center',
         marginLeft:10,
+        flexDirection: 'row',
     },
     item3: {
         flex: 1,

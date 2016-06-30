@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
-
+import ToolBar from './common/ToolBar'
 import Main from './Main'
 import Config from './Config'
 
@@ -18,7 +18,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username:'',
+      username:this.props.route.params ? this.props.route.params.username : '',
       password:'',
       data:null,
     };
@@ -72,17 +72,14 @@ export default class Login extends Component {
     return (
       <View>
 
-        <ToolbarAndroid title="Login"
-         titleColor="#fff"
-         style={styles.toolbar}/>
+        <ToolBar navigator={this.props.navigator} route={this.props.route}/>
 
         <View>
-          
-          <TextInput placeholder='username' placeholderTextColor="#aaa"
+          <TextInput placeholder='用户名' placeholderTextColor="#aaa"
           value={this.state.username}
           onChangeText={(username) => this.setState({username})}/>
 
-          <TextInput placeholder='password' placeholderTextColor="#aaa"
+          <TextInput placeholder='密码' placeholderTextColor="#aaa"
            secureTextEntry={true}
            value={this.state.password}
            onChangeText={(password) => this.setState({password})}/>
@@ -96,7 +93,7 @@ export default class Login extends Component {
               <TouchableOpacity onPress={()=>{this.props.navigator.push({id:'main', title: '首页',})}}>
                 <Text style={styles.unlogin}>Skip</Text>
               </TouchableOpacity>
-              <Text style={styles.newUser}>Register</Text>
+              <Text style={styles.newUser} onPress={()=> this.props.navigator.push({id:'register',title:'注册'})}>Register</Text>
           </View>
 
         </View>
