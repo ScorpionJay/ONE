@@ -68,8 +68,9 @@ export default class Me extends Component {
       textInputValue: '男',
       promptVisible: false,
       sign:'',
-      avatarSource:Config.fileUrl + "577606bb8cda23ce7a0369ff",
+      avatarSource:Config.fileUrl + "deafult",
       username:'',
+      name:'',
       token:''
     };
 
@@ -122,10 +123,12 @@ export default class Me extends Component {
 
            if(responseData.code === 0){
               let obj = responseData.data
+              // Alert.alert('',JSON.stringify(obj))
               this.setState({
                 username: obj.username,
                 sign: obj.sign,
-                avatarSource: Config.fileUrl + obj.img
+                avatarSource: Config.fileUrl + obj.img,
+                name: obj.name
               })
 
            }else{
@@ -183,7 +186,20 @@ export default class Me extends Component {
                 avatarSource: Config.fileUrl + jsonData.data
               });
               ToastAndroid.show(jsonData.msg, ToastAndroid.SHORT)
-          }else{
+          }else if(jsonData.status === 401){
+              // token过期 重新登录
+              ToastAndroid.show('帐号过期，重新登录', ToastAndroid.SHORT)
+              // 删除本地的
+              this.props.navigator.push({
+                  id:'login',
+                  title:'登录',
+                  params: {
+                    username: username
+                  }
+                }
+              )
+          }
+          else{
             ToastAndroid.show('上传失败', ToastAndroid.SHORT)
           }
         })
@@ -192,11 +208,32 @@ export default class Me extends Component {
   });
   }
 
+
+  handle(){
+    if(this.props.route.params.getUser) {
+      this.props.route.params.getUser(this.state.avatarSource);
+    }
+    this.props.navigator.pop()
+  }
+
   render() {
+    const {route} = this.props
     return (
       <View style={styles.container}>
 
-        <ToolBar navigator={this.props.navigator} route={this.props.route}/>
+        
+
+          <View style={styles.tabcontainer}>
+              <TouchableOpacity onPress={this.handle.bind(this)} style= {styles.tabLeft}>
+                  <Icon name="angle-left" size={30} color="#fff" />
+                  <Text style= {styles.tabtext}>返回</Text>
+              </TouchableOpacity>
+              <View style= {styles.tabCenter}>
+                <Text style= {styles.tabtext}>{route.title}</Text>
+              </View>
+              <View style= {styles.tabRight}>
+              </View>
+          </View>
 
         <View style={styles.container}>
 
@@ -215,7 +252,7 @@ export default class Me extends Component {
 
             <View style={styles.item}>
                 <Text style={styles.item1}>名字</Text>
-                <Text style={styles.item3}>jay</Text>
+                <Text style={styles.item3}>{this.state.name}</Text>
             </View>
 
             <TouchableOpacity style={styles.item}  onPress={() => this.setState({ promptVisible: true })}>
@@ -236,17 +273,50 @@ export default class Me extends Component {
         </View>
 
         <Prompt
-          title="修改"
-          placeholder="Start typing"
-          defaultValue="Hello"
+          title=""
+          placeholder="个性签名"
+          defaultValue={this.state.sign}
+          submitText='确认'
+          cancelText='取消' 
           visible={ this.state.promptVisible }
-          onCancel={ () => this.setState({
-            promptVisible: false,
-          }) }
-          onSubmit={ (value) => this.setState({
-            promptVisible: false,
-            sign: value
-          }) }/>
+          onCancel={ () => this.setState({promptVisible: false}) }
+          onSubmit={ (value) => {
+            
+              this.setState({
+                promptVisible: false,
+              })
+
+               // 修改个性签名
+              // Alert.alert('',Config.accountSignUrl)
+            fetch(Config.accountSignUrl, {
+              method: 'PUT',
+              headers: {
+                  // 'Accept': 'application/json',
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  'Auth-Token': this.state.token
+              },
+              body:'sign=' + value
+            })
+            .then((data)=> data.json() )
+            .then((jsonData) =>{
+                if(jsonData.code === 0){
+
+                    ToastAndroid.show(jsonData.msg, ToastAndroid.SHORT)
+
+                    this.setState({
+                      sign: value
+                    })
+
+                }else{
+                  ToastAndroid.show('修改失败', ToastAndroid.SHORT)
+                }
+              }
+            )
+
+
+            } 
+          }
+        />
       
 
       </View>
@@ -255,6 +325,40 @@ export default class Me extends Component {
 }
 
 const styles = StyleSheet.create({
+
+   tabcontainer: {
+    flexDirection: 'row',
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height:40,
+  },
+  tabLeft: {
+    flex:1,
+    flexDirection: 'row',
+    marginLeft:5,
+  },
+  tabimg:{
+    width:20,
+    height:20,
+  },
+  tabtext: {
+    color: '#fff',
+    alignSelf: 'center',
+    marginLeft:5,
+  },
+  tabCenter:{
+    flex:1,
+  },
+  tabRight: {
+    flex:1,
+    justifyContent: 'center',
+  },
+  
+ 
+
+
+
   container: {
     flex: 1,
   },
@@ -280,8 +384,8 @@ const styles = StyleSheet.create({
 
   },
   thumbnail :{
-      width: 30,
-      height: 30,
+      width: 40,
+      height: 40,
       marginRight:10,
       justifyContent: 'center',
       marginTop:7,

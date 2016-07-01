@@ -17,12 +17,13 @@ const storage = new Storage({
 })  
 global.storage = storage;
 
-const serviceUrl = 'http://192.16.2.65:8888/v1/'
+const serviceUrl = 'http://192.168.1.101:8888/v1/'
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
   registerUrl: serviceUrl + 'register',
   accountUrl: serviceUrl + 'account',
+  accountSignUrl: serviceUrl + 'account/sign',
   fileUpload: serviceUrl + 'file/save',
   fileUrl: serviceUrl + 'file/'
 };

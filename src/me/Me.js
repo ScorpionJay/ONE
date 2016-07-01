@@ -10,7 +10,8 @@ import {
   Alert,
   ListView,
   Image,
-  ScrollView
+  ScrollView,
+  ToastAndroid
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -25,11 +26,15 @@ export default class Me extends Component {
     super(props);
 
     this.state = {
-      username:''
+      username:'',
+      img:"test",
+      token:null,
     };
   }
 
   componentDidMount() {
+
+    
     storage.load({
       key: 'loginState',
       // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
@@ -41,7 +46,9 @@ export default class Me extends Component {
       }).then(ret => {
         //如果找到数据，则在then方法中返回
         console.log(ret.userid);
-        this.setState({username:ret.userid})
+        this.setState({username:ret.userid,token:ret.token})
+
+        this._fetch();
       }).catch(err => {
         //如果没有找到数据且没有同步方法，
         //或者有其他异常，则在catch中返回
@@ -50,9 +57,56 @@ export default class Me extends Component {
   }
 
   
+  _fetch(){
+    const {username} = this.state
+    fetch(Config.accountUrl + '/' +username,{
+        headers: {
+          'Auth-Token': this.state.token,
+        },
+      })
+      .then((response) => response.json())
+      .then((responseData) => {
+           // Alert.alert('',JSON.stringify(responseData));
+
+           if(responseData.status === 401){
+              // token过期 重新登录
+              ToastAndroid.show('帐号过期，重新登录', ToastAndroid.SHORT)
+
+              // 删除本地的
+
+
+              this.props.navigator.push(
+                {
+                  id:'login',
+                  title:'登录',
+                  params: {
+                    username: username
+                  }
+                }
+              )
+           }
+
+           if(responseData.code === 0){
+              let obj = responseData.data
+              // Alert.alert('',JSON.stringify(obj))
+              this.setState({
+                username: obj.username,
+                img: Config.fileUrl + obj.img,
+              })
+
+           }else{
+              console.log('error');
+           }
+      })
+      .done();
+  }
 
     handler() {
-      this.props.navigator.push({title:'设置',id:'setting'})
+      this.props.navigator.push({
+        title:'设置',
+        id:'setting',
+       
+      })
     }
 
     _favHandler(){
@@ -60,8 +114,16 @@ export default class Me extends Component {
     }
 
     _accountHandler(){
+      let _this = this;
       const { navigator } = this.props;
-      navigator.push({title:'个人信息',id:'account'})
+      navigator.push({title:'个人信息',id:'account',
+      params: {
+              getUser: function(img) {
+                  _this.setState({
+                      img: img
+                  })
+              }
+        }})
     }
 
     _login(){
@@ -81,7 +143,7 @@ export default class Me extends Component {
                     <TouchableOpacity style={styles.itemHeader} onPress={()=>this._accountHandler()}>
                       
                         <Image
-                            source={{uri: 'http://192.16.2.65:8888/v1/file/577606bb8cda23ce7a0369ff'}}
+                            source={{uri: this.state.img}}
                             style={styles.thumbnail}
                           />
                         <View style={styles.item2}>
@@ -186,6 +248,7 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         marginTop:10,
+        marginLeft:10,
     },
     itemHeader: {
         height: 80,

@@ -16,6 +16,13 @@ export default class ToolBar extends Component {
   }
 
   handle(){
+    // if(this.props.route.params.getUser) {
+    //             Alert.alert('','GETuSER')
+    //   let user = "test";
+    //   this.props.route.params.getUser(user);
+    // }
+
+    Alert.alert("",this.props.test)
     const { navigator ,route } = this.props
     if(route.id !== 'main' && route.id !== 'login'){
       navigator.pop()
@@ -61,6 +68,7 @@ const styles = StyleSheet.create({
   tabLeft: {
     flex:1,
     flexDirection: 'row',
+    marginLeft:5,
   },
   img:{
     width:20,
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     alignSelf: 'center',
-    marginLeft:2,
+    marginLeft:5,
   },
   tabCenter:{
     flex:1,
