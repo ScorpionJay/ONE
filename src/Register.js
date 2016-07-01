@@ -56,7 +56,7 @@ export default class Register extends Component{
           )
 
         }else{
-          ToastAndroid.show(responseData.obj, ToastAndroid.SHORT)
+          ToastAndroid.show(responseData.msg, ToastAndroid.SHORT)
         }
      // }) {
 

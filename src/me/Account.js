@@ -100,11 +100,14 @@ export default class Me extends Component {
       })
       .then((response) => response.json())
       .then((responseData) => {
-           //Alert.alert('',JSON.stringify(responseData));
+           // Alert.alert('',JSON.stringify(responseData));
 
            if(responseData.status === 401){
               // token过期 重新登录
               ToastAndroid.show('帐号过期，重新登录', ToastAndroid.SHORT)
+
+              // 删除本地的
+
 
               this.props.navigator.push(
                 {
@@ -118,7 +121,7 @@ export default class Me extends Component {
            }
 
            if(responseData.code === 0){
-              let obj = responseData.obj
+              let obj = responseData.data
 
               this.setState({
                 username: obj.username,

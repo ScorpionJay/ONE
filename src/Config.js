@@ -17,7 +17,7 @@ const storage = new Storage({
 })  
 global.storage = storage;
 
-const serviceUrl = 'http://192.16.2.65:8888/'
+const serviceUrl = 'http://192.16.2.65:8888/v1/'
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
