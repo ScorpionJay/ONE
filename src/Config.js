@@ -22,5 +22,7 @@ export default {
   initTab:'Home',
   loginUrl:serviceUrl,
   registerUrl: serviceUrl + 'register',
-  accountUrl: serviceUrl + 'account'
+  accountUrl: serviceUrl + 'account',
+  fileUpload: serviceUrl + 'file/save',
+  fileUrl: serviceUrl + 'file/'
 };

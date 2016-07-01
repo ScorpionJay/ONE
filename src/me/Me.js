@@ -81,7 +81,7 @@ export default class Me extends Component {
                     <TouchableOpacity style={styles.itemHeader} onPress={()=>this._accountHandler()}>
                       
                         <Image
-                            source={require("../images/me1.png")}
+                            source={{uri: 'http://192.16.2.65:8888/v1/file/577606bb8cda23ce7a0369ff'}}
                             style={styles.thumbnail}
                           />
                         <View style={styles.item2}>
@@ -130,7 +130,7 @@ export default class Me extends Component {
                     <TouchableOpacity style={styles.itemHeader} onPress={this._login.bind(this)}>
                       
                         <Image
-                            source={require("../images/me1.png")}
+                            source={{uri: 'http://192.16.2.65:8888/v1/file/577606bb8cda23ce7a0369ff'}}
                             style={styles.thumbnail}
                           />
                         <View style={styles.item2}>

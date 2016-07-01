@@ -68,7 +68,7 @@ export default class Me extends Component {
       textInputValue: '男',
       promptVisible: false,
       sign:'',
-      avatarSource:require("../images/me1.png"),
+      avatarSource:Config.fileUrl + "577606bb8cda23ce7a0369ff",
       username:'',
       token:''
     };
@@ -122,10 +122,10 @@ export default class Me extends Component {
 
            if(responseData.code === 0){
               let obj = responseData.data
-
               this.setState({
                 username: obj.username,
-                sign: obj.sign
+                sign: obj.sign,
+                avatarSource: Config.fileUrl + obj.img
               })
 
            }else{
@@ -156,9 +156,38 @@ export default class Me extends Component {
       // const source = {uri: response.uri.replace('file://', ''), isStatic: true};
       // uri (on android)
       const source = {uri: response.uri, isStatic: true};
-      this.setState({
-        avatarSource: source
-      });
+      // this.setState({
+      //   avatarSource: source
+      // });
+
+
+      // 这里上传？？？
+      //var input = document.querySelector('input[type="file"]')
+
+      var data = new FormData()
+      //data.append('file', response.uri)
+      data.append('file', {uri: response.uri, name: "test", type: 'image/jpg'});
+      
+     // Alert.alert('',Config.fileUpload + response.uri)
+      fetch(Config.fileUpload, {
+        method: 'POST',
+        headers: {
+            "Content-Type": " multipart/form-data ",
+            'Auth-Token': this.state.token
+        },
+        body: data
+      }).then((data)=> data.json() )
+        .then((jsonData) =>{
+          if(jsonData.code === 0){
+              this.setState({
+                avatarSource: Config.fileUrl + jsonData.data
+              });
+              ToastAndroid.show(jsonData.msg, ToastAndroid.SHORT)
+          }else{
+            ToastAndroid.show('上传失败', ToastAndroid.SHORT)
+          }
+        })
+
     }
   });
   }
@@ -174,7 +203,7 @@ export default class Me extends Component {
             <TouchableOpacity style={styles.item} onPress={this.imageHandler.bind(this)}>
                 <Text style={styles.item1}>头像</Text>
                  <Image
-                  source={this.state.avatarSource}
+                   source={{uri: this.state.avatarSource}}
                   style={[styles.thumbnail]}
                 />
             </TouchableOpacity>
