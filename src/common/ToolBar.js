@@ -16,13 +16,6 @@ export default class ToolBar extends Component {
   }
 
   handle(){
-    // if(this.props.route.params.getUser) {
-    //             Alert.alert('','GETuSER')
-    //   let user = "test";
-    //   this.props.route.params.getUser(user);
-    // }
-
-    Alert.alert("",this.props.test)
     const { navigator ,route } = this.props
     if(route.id !== 'main' && route.id !== 'login'){
       navigator.pop()

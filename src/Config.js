@@ -17,7 +17,7 @@ const storage = new Storage({
 })  
 global.storage = storage;
 
-const serviceUrl = 'http://192.168.1.101:8888/v1/'
+const serviceUrl = 'http://scorpioner.xicp.net/v1/' //测试url
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
