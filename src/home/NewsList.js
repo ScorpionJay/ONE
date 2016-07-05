@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
-
 var React = require('react');
 var {
   StyleSheet,
@@ -32,13 +26,14 @@ var Example = React.createClass({
       var header = 'Header '+page;
       var rows = {};
       rows[header] = ['row '+((page - 1) * 3 + 1), 'row '+((page - 1) * 3 + 2), 'row '+((page - 1) * 3 + 3),'row '+((page - 1) * 3 + 3),'row '+((page - 1) * 3 + 3)];
-      if (page === 5) {
-        callback(rows, {
-          allLoaded: true, // the end of the list is reached
-        });
-      } else {
-        callback(rows);
-      }
+      callback(rows);
+      // if (page === 5) {
+      //   callback(rows, {
+      //     allLoaded: true, // the end of the list is reached
+      //   });
+      // } else {
+      //   callback(rows);
+      // }
     }, 0); // simulating network fetching
   },
 
@@ -49,6 +44,14 @@ var Example = React.createClass({
    */
   _onPress(rowData) {
     console.log(rowData+' pressed');
+    const {navigator,router} = this.props
+    navigator.push({
+      title:'详情',
+      id:'detail',
+      params: {
+                id: rowData
+            }
+    })
   },
 
   /**

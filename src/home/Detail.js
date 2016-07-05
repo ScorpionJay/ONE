@@ -29,9 +29,9 @@ export default class Detail extends Component {
 
   handler(){
     console.log(this.props)
-    const { navigator } = this.props
-    navigator.push({title:'third',id:'third'}
-    )
+    // const { navigator } = this.props
+    // navigator.push({title:'third',id:'third'}
+    // )
   }
 
   // 获取数据方法
@@ -53,6 +53,7 @@ export default class Detail extends Component {
 
   componentDidMount() {
     this.setState({id:this.props.route.params.id})
+    Alert.alert('',this.props.route.params.id)
     this.fetchData()
   }
 
