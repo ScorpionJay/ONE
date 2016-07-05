@@ -17,7 +17,8 @@ const storage = new Storage({
 })  
 global.storage = storage;
 
-const serviceUrl = 'http://scorpioner.xicp.net/v1/' //测试url
+// const serviceUrl = 'http://scorpioner.xicp.net/v1/' //测试url
+const serviceUrl = 'http://192.16.2.120:8080/spring-security-1.0/v1/'
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,

@@ -21,8 +21,8 @@ export default class ListItemCompontent extends Component{
 	handler(){
 		const {navigator,router} = this.props
 		navigator.push({
-			title:'详情',
-			id:'detail',
+			title:'文章',
+			id:'newsList',
 			params: {
                 id: this.props.data.id
             }

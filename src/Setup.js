@@ -10,6 +10,7 @@ import Main from './Main'
 import Register from './Register'
 
 import Home from './home/Home'
+import NewsList from './home/NewsList'
 import Detail from './home/Detail'
 import Third from './home/Third'
 
@@ -40,6 +41,9 @@ export default class Setup extends Component {
       // home
       case 'home':
             return <Home navigator={navigator} route={route}/>
+            break;
+      case 'newsList':
+            return <NewsList navigator={navigator} route={route}/>
             break;
       case  'detail':
             return <Detail navigator={navigator} route={route}/>
