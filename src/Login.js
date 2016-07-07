@@ -7,26 +7,35 @@ import {
   ToolbarAndroid,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,ToastAndroid,
+    TouchableHighlight
 } from 'react-native';
 import ToolBar from './common/ToolBar'
 import Main from './Main'
 import Config from './Config'
 
 export default class Login extends Component {
-
   constructor(props) {
-    super(props);
-    this.state = {
-      username:this.props.route.params ? this.props.route.params.username : '',
-      password:'',
-      data:null,
-    };
+        super(props);
+        this.state = {
+          username:this.props.route.params ? this.props.route.params.username : '',
+          password:'',
+          data:null,
+        };
+       this.login = this.login.bind(this);
   }
 
   login(){
-    let {username,password} = this.state
-    //Alert.alert("提示", `username: ${username} ,password:${password}`)
+      let {username,password} = this.state
+      if(username==''||username==undefined){
+          ToastAndroid.show('用户名不能为空', ToastAndroid.SHORT);
+          return;
+      }
+
+      if(password==''||password==undefined){
+          ToastAndroid.show('密码不能为空', ToastAndroid.SHORT);
+          return;
+      }
     // 需要检验
     this.fetchData();
   }
@@ -84,16 +93,22 @@ export default class Login extends Component {
            value={this.state.password}
            onChangeText={(password) => this.setState({password})}/>
 
-          <TouchableOpacity style={styles.btn} onPress={() => this.login()}>
-              <Text style={styles.btnText}>Login</Text>
-          </TouchableOpacity>
+
+            <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+                <TouchableHighlight
+                    onPress={() => this.login()}
+                    underlayColor={'#999'}
+                    style={{height: 48,alignItems: 'center',justifyContent:'center'}}>
+                    <Text style={{fontSize: 16,color: 'white',fontWeight: '300',}}>登        录</Text>
+                </TouchableHighlight>
+            </View>
 
           <View style={styles.options}>
-              <Text style={styles.unlogin}>Can't login?</Text>
+              <Text style={styles.unlogin}>没有账号?</Text>
               <TouchableOpacity onPress={()=>{this.props.navigator.push({id:'main', title: '首页',})}}>
-                <Text style={styles.unlogin}>Skip</Text>
+                <Text style={styles.unlogin}>体验一下</Text>
               </TouchableOpacity>
-              <Text style={styles.newUser} onPress={()=> this.props.navigator.push({id:'register',title:'注册'})}>Register</Text>
+              <Text style={styles.newUser} onPress={()=> this.props.navigator.push({id:'register',title:'注册'})}>立即注册</Text>
           </View>
 
         </View>
