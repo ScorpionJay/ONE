@@ -11,6 +11,7 @@ import {
 import TabNavigator from 'react-native-tab-navigator'
 
 import Home from './home/Home'
+import Find from './find/Find'
 import Me from './me/Me'
 import Config from './Config'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -35,6 +36,15 @@ export default class Test extends Component {
           onPress={() => {this.setState({ selectedTab: 'Home' });this.props.route.title='首页'}}>
           <Home navigator={this.props.navigator} route={this.props.route}/>
         </TabNavigator.Item>
+          <TabNavigator.Item
+              selected={this.state.selectedTab === 'Find'}
+              title="发现"
+              renderIcon={() => <Icon name="rocket" size={25} color="#aaa" />}
+              renderSelectedIcon={() => <Icon name="rocket" size={25} color="#238CFE" />}
+              onPress={() => {this.setState({ selectedTab: 'Find' });this.props.route.title='发现' } }>
+              <Find navigator={this.props.navigator} route={this.props.route}/>
+          </TabNavigator.Item>
+
         <TabNavigator.Item
           selected={this.state.selectedTab === 'Me'}
           title="我"
