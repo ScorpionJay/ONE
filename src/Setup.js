@@ -19,6 +19,8 @@ import Account from './me/Account'
 import Setting from './me/Setting'
 import About from './me/About'
 
+import Posts from './post/Posts'
+
 import Storage from 'react-native-storage'
 
 export default class Setup extends Component {
@@ -64,6 +66,10 @@ export default class Setup extends Component {
             break;
       case  'setting':
             return <Setting navigator={navigator} route={route}/>
+            break;
+
+      case  'posts':
+            return <Posts navigator={navigator} route={route}/>
             break;    
     }
   }

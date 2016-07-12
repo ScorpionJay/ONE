@@ -18,9 +18,10 @@ const storage = new Storage({
 global.storage = storage;
 
 //const serviceUrl = 'http://scorpioner.xicp.net/v1/' //测试url
-const serviceUrl = 'http://192.168.1.201:8080/spring-security-1.0/v1/'
+//const serviceUrl = 'http://192.168.1.201:8080/spring-security-1.0/v1/'
 
 //const serviceUrl = 'http://192.168.1.201:8888/v1/' //本地url
+const serviceUrl = 'http://192.16.2.120:8889/v1/' //jay
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
@@ -28,5 +29,7 @@ export default {
   accountUrl: serviceUrl + 'account',
   accountSignUrl: serviceUrl + 'account/sign',
   fileUpload: serviceUrl + 'file/save',
-  fileUrl: serviceUrl + 'file/'
+  fileUrl: serviceUrl + 'file/',
+  postsUrl: serviceUrl + 'article/posts'
+
 };

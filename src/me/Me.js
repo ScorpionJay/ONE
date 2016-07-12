@@ -109,6 +109,14 @@ export default class Me extends Component {
       })
     }
 
+    _posts() {
+      this.props.navigator.push({
+        title:'动态',
+        id:'posts',
+       
+      })
+    }
+
     _favHandler(){
       Alert.alert('','开发中');
     }
@@ -149,6 +157,17 @@ export default class Me extends Component {
                         <View style={styles.item2}>
                             <Text >{this.state.username}</Text>
                         </View>
+                        <View style={styles.item3}>
+                            <Icon name="angle-right" size={25} color="#aaa" />
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item} onPress={()=>this._posts()}>
+                        <View style={styles.item1}>
+                          <Icon name="picture-o" size={20} color="#238CFE" />
+                          <Text style={{marginLeft:5}}>动态</Text>
+                        </View>
+
                         <View style={styles.item3}>
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
