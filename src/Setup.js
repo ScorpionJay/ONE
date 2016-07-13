@@ -19,6 +19,7 @@ import Account from './me/Account'
 import Setting from './me/Setting'
 import About from './me/About'
 
+import Post from './post/Post'
 import Posts from './post/Posts'
 
 import CreateDynamic from './find/CreateDynamic'
@@ -70,6 +71,9 @@ export default class Setup extends Component {
             return <Setting navigator={navigator} route={route}/>
             break;
 
+      case  'post':
+            return <Post navigator={navigator} route={route}/>
+            break;
       case  'posts':
             return <Posts navigator={navigator} route={route}/>
             break;
