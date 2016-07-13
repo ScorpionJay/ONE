@@ -21,6 +21,8 @@ import About from './me/About'
 
 import Posts from './post/Posts'
 
+import CreateDynamic from './find/CreateDynamic'
+
 import Storage from 'react-native-storage'
 
 export default class Setup extends Component {
@@ -70,15 +72,17 @@ export default class Setup extends Component {
 
       case  'posts':
             return <Posts navigator={navigator} route={route}/>
-            break;    
+            break;
+      case  'CreateDynamic':
+            return <CreateDynamic navigator={navigator} route={route}/>
+            break
     }
   }
-
   render() {
     return (
         <Navigator
-          initialRoute={{ title: '欢迎页', id:'splash'}}
-          renderScene={this._renderScene}
+            initialRoute={{ title: '欢迎页', id:'splash'}}
+            renderScene={this._renderScene}
         />      
     );
   }

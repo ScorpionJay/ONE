@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  ToolbarAndroid,
-  TextInput,
-  TouchableOpacity,
-  Alert,ToastAndroid,
-    TouchableHighlight
+      AppRegistry,
+      StyleSheet,
+      Text,
+      View,
+      ToolbarAndroid,
+      TextInput,
+      TouchableOpacity,
+      Alert,ToastAndroid,
+      Image,
+      TouchableHighlight
 } from 'react-native';
 import ToolBar from './common/ToolBar'
 import Main from './Main'
@@ -79,19 +80,33 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{backgroundColor:'#f4f4f4',flex:1}}>
 
         <ToolBar navigator={this.props.navigator} route={this.props.route}/>
 
-        <View>
-          <TextInput placeholder='用户名' placeholderTextColor="#aaa"
-          value={this.state.username}
-          onChangeText={(username) => this.setState({username})}/>
+          <Image
+              style={styles.style_image}
+              source={require('../logo.png')}/>
 
-          <TextInput placeholder='密码' placeholderTextColor="#aaa"
-           secureTextEntry={true}
-           value={this.state.password}
-           onChangeText={(password) => this.setState({password})}/>
+          <View>
+          <TextInput  placeholder='用户名' placeholderTextColor="#aaa"
+                      style={styles.style_user_input}
+                      autoFocus={true}
+                      numberOfLines={1}
+                      underlineColorAndroid={'transparent'}
+                      textAlign='center'
+                      value={this.state.username}
+                      onChangeText={(username) => this.setState({username})}/>
+              <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+
+              <TextInput placeholder='密码' placeholderTextColor="#aaa"
+                             style={styles.style_pwd_input}
+                             numberOfLines={1}
+                             underlineColorAndroid={'transparent'}
+                             secureTextEntry={true}
+                             textAlign='center'
+                             value={this.state.password}
+                             onChangeText={(password) => this.setState({password})}/>
 
 
             <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
@@ -160,7 +175,24 @@ const styles = StyleSheet.create({
       textAlign: 'right',
       marginRight: 10,
       color: '#63B8FF'
-  }
+  },
+    style_image:{
+        borderRadius:35,
+        height:70,
+        width:70,
+        marginTop:40,
+        alignSelf:'center',
+    },
+    style_user_input:{
+        backgroundColor:'#fff',
+        marginTop:10,
+        height:35,
+    },
+    style_pwd_input:{
+        backgroundColor:'#fff',
+        height:35,
+    },
+
 });
 
 

@@ -117,6 +117,13 @@ export default class Me extends Component {
       })
     }
 
+    _createDynamic(){
+        this.props.navigator.push({
+            title:'发表动态',
+            id:'CreateDynamic',
+        })
+    }
+
     _favHandler(){
       Alert.alert('','开发中');
     }
@@ -161,6 +168,7 @@ export default class Me extends Component {
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
                     <TouchableOpacity style={styles.item} onPress={()=>this._posts()}>
                         <View style={styles.item1}>
@@ -172,6 +180,20 @@ export default class Me extends Component {
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+
+                      <TouchableOpacity style={styles.item} onPress={()=>this._createDynamic()}>
+                          <View style={styles.item1}>
+                              <Icon name="picture-o" size={20} color="#238CFE" />
+                              <Text style={{marginLeft:5}}>发表动态</Text>
+                          </View>
+
+                          <View style={styles.item3}>
+                              <Icon name="angle-right" size={25} color="#aaa" />
+                          </View>
+                      </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+
 
                     <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
                         <View style={styles.item1}>
@@ -184,6 +206,8 @@ export default class Me extends Component {
                         </View>
                     </TouchableOpacity>
 
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+
                     <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
                         <View style={styles.item1}>
                             <Icon name="gear" size={20} color="#238CFE" />
@@ -194,6 +218,7 @@ export default class Me extends Component {
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
                 </ScrollView>
                 </View>
       )
@@ -221,6 +246,7 @@ export default class Me extends Component {
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
                     <TouchableOpacity style={styles.item} onPress={()=>this._favHandler()}>
                         <View style={styles.item1}>
@@ -232,6 +258,7 @@ export default class Me extends Component {
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
                     <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>
                         <View style={styles.item1}>
@@ -244,6 +271,7 @@ export default class Me extends Component {
                         </View>
 
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
                 </ScrollView>
                 </View>
@@ -277,7 +305,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     item: {
-        marginTop:10,
         flex:1,
         flexDirection: 'row',
         backgroundColor: '#fff',

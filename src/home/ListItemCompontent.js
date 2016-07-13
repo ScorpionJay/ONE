@@ -33,6 +33,7 @@ export default class ListItemCompontent extends Component{
 		const {name,description} = this.props.data
 		
 		return (
+			<View>
 				<TouchableOpacity onPress={this.handler.bind(this)}>
 	                <View style={styles.container} >
 						<View style={styles.name}>
@@ -45,6 +46,8 @@ export default class ListItemCompontent extends Component{
 						</View>
 					</View>
 	            </TouchableOpacity>
+				<View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+			</View>
 		);
 	}
 
@@ -56,7 +59,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flex: 1,
 		backgroundColor:'#fff',
-		marginTop:10,
 		padding:5,
 		height:45,
 	},

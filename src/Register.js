@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  ToastAndroid,
-    TouchableHighlight
+      StyleSheet,
+      Text,
+      View,
+      Image,
+      TouchableOpacity,
+      TextInput,
+      ToastAndroid,
+      TouchableHighlight
 } from 'react-native';
 import ToolBar from './common/ToolBar'
 import Config from './Config'
@@ -104,18 +104,33 @@ export default class Register extends Component{
 
   render() {
     return (
-      <View>
+      <View style={{backgroundColor:'#f4f4f4',flex:1}}>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
+          <Image
+              style={styles.style_image}
+              source={require('../logo.png')}/>
 
           <View>
-            <TextInput placeholder='用户名' placeholderTextColor="#aaa"
-            value={this.state.username}
-            onChangeText={(username) => this.setState({username})}/>
+            <TextInput
+                placeholder='用户名' placeholderTextColor="#aaa"
+                style={styles.style_user_input}
+                autoFocus={true}
+                numberOfLines={1}
+                underlineColorAndroid={'transparent'}
+                textAlign='center'
+                value={this.state.username}
+                onChangeText={(username) => this.setState({username})}/>
+              <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
-            <TextInput placeholder='密码' placeholderTextColor="#aaa"
-             secureTextEntry={true}
-             value={this.state.password}
-             onChangeText={(password) => this.setState({password})}/>
+            <TextInput
+                 placeholder='密码' placeholderTextColor="#aaa"
+                 style={styles.style_pwd_input}
+                 numberOfLines={1}
+                 underlineColorAndroid={'transparent'}
+                 textAlign='center'
+                 secureTextEntry={true}
+                 value={this.state.password}
+                 onChangeText={(password) => this.setState({password})}/>
 
               <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
                   <TouchableHighlight
@@ -176,5 +191,22 @@ const styles = StyleSheet.create({
       textAlign: 'right',
       marginRight: 10,
       color: '#63B8FF'
-  }
+  },
+    style_image:{
+        borderRadius:35,
+        height:70,
+        width:70,
+        marginTop:40,
+        alignSelf:'center',
+    },
+    style_user_input:{
+        backgroundColor:'#fff',
+        marginTop:10,
+        height:35,
+    },
+    style_pwd_input:{
+        backgroundColor:'#fff',
+        height:35,
+    },
+
 });
