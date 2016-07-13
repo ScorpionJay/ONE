@@ -20,16 +20,12 @@ export default class ListCompontent extends Component{
 
   constructor(props) {
     super(props);
-  
     this.state = {
-      id:null,
       data:{
         time:null
       }
     };
   }
-
-
 
   /**
    * Will be called when refreshing
@@ -40,46 +36,27 @@ export default class ListCompontent extends Component{
    */
   _onFetch(page = 1, callback, options) {
    
-
-    if(page === 1 ){
-      this.setState({time:null})
-    }
-
-    let url = this.state.time ? Config.postsUrl + '?date=' + this.state.time : Config.postsUrl
-    Alert.alert('',url)
-     fetch(url)
+    let url = page ===1 ? Config.postsUrl : Config.postsUrl + '?date=' + this.state.time 
+    fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
-            //Alert.alert('',JSON.stringify(responseData));
             if(responseData.code === 0){
               let obj = responseData.data
-               Alert.alert('',JSON.stringify(obj))
-
-              if(obj.length > 0){
+              if( obj.length > 0 ){
                 this.setState({time:obj[obj.length - 1].createTime})
+                if( obj.length  < Config.pageSize -1 ){
+                  callback(obj, {allLoaded: true})
+                }else{
+                  callback(obj);
+                }
+              }else{
+                callback(obj, {allLoaded: true})
               }
-              
-
-              callback(obj);
            }else{
               console.log('error');
            }
       })
       .done();
-
-    // setTimeout(() => {
-    //   var header = 'Header '+page;
-    //   var rows = {};
-    //   rows[header] = ['row '+((page - 1) * 3 + 1), 'row '+((page - 1) * 3 + 2), 'row '+((page - 1) * 3 + 3)];
-    //   callback(rows);
-    //   if (page === 3) {
-    //     callback(rows, {
-    //       allLoaded: true, // the end of the list is reached
-    //     });
-    //   } else {
-    //     callback(rows);
-    //   }
-    // }, 0); // simulating network fetching
   }
 
 
@@ -203,7 +180,7 @@ export default class ListCompontent extends Component{
     return (
       <View style={customStyles.paginationView}>
         <Text style={customStyles.actionsLabel}>
-          ~
+          已全部加载！
         </Text>
       </View>
     );
@@ -217,7 +194,7 @@ export default class ListCompontent extends Component{
     return (
       <View style={customStyles.defaultView}>
         <Text style={customStyles.defaultViewTitle}>
-          Sorry, there is no content to display
+          没有数据！
         </Text>
 
         <TouchableHighlight

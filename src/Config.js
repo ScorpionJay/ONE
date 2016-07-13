@@ -30,6 +30,9 @@ export default {
   accountSignUrl: serviceUrl + 'account/sign',
   fileUpload: serviceUrl + 'file/save',
   fileUrl: serviceUrl + 'file/',
-  postsUrl: serviceUrl + 'article/posts'
+  postsUrl: serviceUrl + 'article/posts',
+  postUrl: serviceUrl + 'article/post/',
+
+  pageSize:10
 
 };

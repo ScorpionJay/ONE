@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import ToolBar from '../common/ToolBar'
+import Config from '../Config'
 
 const REQUEST_URL = 'https://gist.githubusercontent.com/ScorpionJay/de11dc5bacefea9cee5394b73f456688/raw/e86fd421e4bce5c85dd87d29ddc7315ec1d33eed/list.json';
 
@@ -18,11 +19,13 @@ export default class Detail extends Component {
     super(props);
   
     this.state = {
-      id:null,
+      id:this.props.route.params.id,
       data:{
         id:null,
-        name:null,
-        description:null
+        title:null,
+        content:null,
+        auth:null,
+        createTime:null
       }
     };
   }
@@ -34,39 +37,31 @@ export default class Detail extends Component {
     // )
   }
 
-  // 获取数据方法
-    fetchData() {
-      fetch(REQUEST_URL)
+  componentDidMount() {
+    fetch(Config.postUrl + this.state.id )
         .then((response) => response.json())
         .then((responseData) => {
-          responseData.map(item => {
-             if(item.id === this.state.id){
-                this.setState({
-                  data: item,
-                });
-                return
-              }
-          })
+          if(responseData.code === 0){
+              //Alert.alert('',JSON.stringify(responseData))
+              this.setState({data:responseData.data})
+          }else{
+              console.log('error');
+          }
         })
         .done();
-    }
-
-  componentDidMount() {
-    this.setState({id:this.props.route.params.id})
-    Alert.alert('',this.props.route.params.id)
-    this.fetchData()
   }
 
   render() {
-    const {id,name,description} = this.state.data
+    const {title,content,auth,createTime} = this.state.data
 
     return (
       <View>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <TouchableOpacity onPress={this.handler.bind(this)}>
-            <Text>id: {id}</Text>
-            <Text>name: {name}</Text>
-            <Text>description: {description}</Text>
+            <Text>title: {title}</Text>
+            <Text>content: {content}</Text>
+            <Text>auth: {auth}</Text>
+            <Text>createTime: {createTime}</Text>
           </TouchableOpacity>
       </View>
 
