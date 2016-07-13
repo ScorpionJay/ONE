@@ -21,7 +21,7 @@ global.storage = storage;
 //const serviceUrl = 'http://192.168.1.201:8080/spring-security-1.0/v1/'
 
 //const serviceUrl = 'http://192.168.1.201:8888/v1/' //本地url
-const serviceUrl = 'http://192.16.2.120:8889/v1/' //jay
+const serviceUrl = 'http://192.168.1.101:8889/v1/' //jay desktop
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
@@ -33,6 +33,8 @@ export default {
   postsUrl: serviceUrl + 'article/posts',
   postUrl: serviceUrl + 'article/post/',
 
-  pageSize:10
+  pageSize:10,
+
+  postListApi: serviceUrl + '/post/list/'
 
 };

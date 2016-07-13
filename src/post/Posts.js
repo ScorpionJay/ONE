@@ -1,92 +1,321 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  ToolbarAndroid,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  ListView,
-  Image,
-  ScrollView,
-  ToastAndroid,
-  RefreshControl,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+  TouchableHighlight,
+  Platform,
+  Alert
+} from 'react-native';
+
+var GiftedListView = require('react-native-gifted-listview');
+var GiftedSpinner = require('react-native-gifted-spinner');
 
 import ToolBar from '../common/ToolBar'
-
 import Config from '../Config'
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-export default class Posts extends Component {
+// 禁掉黄色警告
+console.disableYellowBox = true;
+
+export default class ListCompontent extends Component{
 
   constructor(props) {
     super(props);
-
     this.state = {
-      refreshing: false,
-      dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3']),
+      data:{
+        time:null
+      }
     };
   }
 
- _onRefresh() {
-    this.setState({refreshing: true});
+  /**
+   * Will be called when refreshing
+   * Should be replaced by your own logic
+   * @param {number} page Requested page to fetch
+   * @param {function} callback Should pass the rows
+   * @param {object} options Inform if first load
+   */
+  _onFetch(page = 1, callback, options) {
+   
+    let url = page ===1 ? Config.postListApi : Config.postListApi + this.state.time 
+    fetch(url)
+      .then((response) => response.json())
+      .then((responseData) => {
+            if(responseData.code === 0){
+              let obj = responseData.data
 
-    this.setState({dataSource:this.state.dataSource.cloneWithRows(['row 4', 'row 5'])})
+              // TODO
+              if (obj.length === 0) {
+                callback([]);
+                return;
+              };
 
-    this.setState({refreshing: false});
-
-
+              // if( obj.length > 0 ){
+              //   this.setState({time:obj[obj.length - 1].createTime})
+              //   if( obj.length  < Config.pageSize -1 ){
+              //     callback(obj, {allLoaded: true})
+              //   }else{
+              //     callback(obj);
+              //   }
+              // }else{
+              //   callback(obj, {allLoaded: true})
+              // }
+           }else{
+              console.log('error');
+           }
+      })
+      .done();
   }
 
-  _more(){
-    //Alert.alert('','more');
-      this.setState({dataSource:this.state.dataSource.cloneWithRows(['row 12', 'row 23','row 2', 'row 2'])})
 
-
-     
+  /**
+   * 点击
+   */
+  _onPress(id) {
+    const {navigator,router} = this.props
+    navigator.push({
+      title:'详情',
+      id:'detail',
+      params: {
+                id: id
+            }
+    })
   }
 
+  /**
+   * Render a row
+   * @param {object} rowData Row data
+   */
+  _renderRowView(rowData) {
+    return (
+      <TouchableHighlight
+        style={customStyles.row}
+        underlayColor='#c8c7cc'
+        onPress={() => this._onPress(rowData.id)}
+      >
+        <Text>{rowData.id}</Text>
+      </TouchableHighlight>
+    );
+  }
+
+  /**
+   * Render the refreshable view when waiting for refresh
+   * On Android, the view should be touchable to trigger the refreshCallback
+   * @param {function} refreshCallback The function to call to refresh the listview
+   */
+  _renderRefreshableWaitingView(refreshCallback) {
+    if (Platform.OS !== 'android') {
+      return (
+        <View style={customStyles.refreshableView}>
+          <Text style={customStyles.actionsLabel}>
+            ↓
+          </Text>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableHighlight
+          underlayColor='#c8c7cc'
+          onPress={refreshCallback}
+          style={customStyles.refreshableView}
+        >
+          <Text style={customStyles.actionsLabel}>
+            ↻
+          </Text>
+        </TouchableHighlight>
+      );
+    }
+  }
+
+  /**
+   * Render the refreshable view when the pull to refresh has been activated
+   * @platform ios
+   */
+  _renderRefreshableWillRefreshView() {
+    return (
+      <View style={customStyles.refreshableView}>
+        <Text style={customStyles.actionsLabel}>
+          ↻
+        </Text>
+      </View>
+    );
+  }
+
+  /**
+   * Render the refreshable view when fetching
+   */
+  _renderRefreshableFetchingView() {
+    return (
+      <View style={customStyles.refreshableView}>
+        <GiftedSpinner />
+      </View>
+    );
+  }
+
+  /**
+   * Render the pagination view when waiting for touch
+   * @param {function} paginateCallback The function to call to load more rows
+   */
+  _renderPaginationWaitingView(paginateCallback) {
+    return (
+      <TouchableHighlight
+        underlayColor='#c8c7cc'
+        onPress={paginateCallback}
+        style={customStyles.paginationView}
+      >
+        <Text style={[customStyles.actionsLabel, {fontSize: 13}]}>
+         加载更多
+        </Text>
+      </TouchableHighlight>
+    );
+  }
+
+  /**
+   * Render the pagination view when fetching
+   */
+  _renderPaginationFetchigView() {
+    return (
+      <View style={customStyles.paginationView}>
+        <GiftedSpinner />
+      </View>
+    );
+  }
+
+  /**
+   * Render the pagination view when end of list is reached
+   */
+  _renderPaginationAllLoadedView() {
+    return (
+      <View style={customStyles.paginationView}>
+        <Text style={customStyles.actionsLabel}>
+          已全部加载！
+        </Text>
+      </View>
+    );
+  }
+
+  /**
+   * Render a view when there is no row to display at the first fetch
+   * @param {function} refreshCallback The function to call to refresh the listview
+   */
+  _renderEmptyView(refreshCallback) {
+    return (
+      <View style={customStyles.defaultView}>
+        <Text style={customStyles.defaultViewTitle}>
+          没有数据！
+        </Text>
+
+        <TouchableHighlight
+          underlayColor='#c8c7cc'
+          onPress={refreshCallback}
+        >
+          <Text>
+            ↻
+          </Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
 
   render() {
     return (
-      <View style={styles.container}>
-          <ToolBar navigator={this.props.navigator} route={this.props.route}/>
-          
-          <ListView 
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh.bind(this)}
-                tintColor="#ff0000"
-                title="Loading..."
-                titleColor="#00ff00"
-                colors={['#ff0000', '#00ff00', '#0000ff']}
-                progressBackgroundColor="#ffff00"
-              />
-            }
-            
-            dataSource={this.state.dataSource}
-            renderRow={(rowData,rowHasChanged) => <Text>{rowData +':'+ rowHasChanged}</Text>}
-            onEndReached={()=>this._more()}
-            removeClippedSubviews={false}
-            onEndReachedThreshold ={10}
-            >
-           
-            
-          </ListView>
+      <View style={screenStyles.container}>
+
+        <ToolBar navigator={this.props.navigator} route={this.props.route}/>
+
+
+        <GiftedListView
+          rowView={this._renderRowView.bind(this)}
+
+          onFetch={this._onFetch.bind(this)}
+          initialListSize={10} // the maximum number of rows displayable without scrolling (height of the listview / height of row)
+
+          firstLoader={true} // display a loader for the first fetching
+
+          pagination={true} // enable infinite scrolling using touch to load more
+          paginationFetchigView={this._renderPaginationFetchigView}
+          paginationAllLoadedView={this._renderPaginationAllLoadedView}
+          paginationWaitingView={this._renderPaginationWaitingView}
+
+          refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
+          refreshableViewHeight={50} // correct height is mandatory
+          refreshableDistance={40} // the distance to trigger the pull-to-refresh - better to have it lower than refreshableViewHeight
+          refreshableFetchingView={this._renderRefreshableFetchingView}
+          refreshableWillRefreshView={this._renderRefreshableWillRefreshView}
+          refreshableWaitingView={this._renderRefreshableWaitingView}
+
+          emptyView={this._renderEmptyView}
+
+          rowHasChanged={(r1,r2)=>{
+            r1.id !== r2.id
+          }}
+
+        />
       </View>
-    )
+    );
   }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#eee',
-    }
-});
 
+var customStyles = {
+  separator: {
+    height: 1,
+    backgroundColor: '#CCC'
+  },
+  refreshableView: {
+    height: 50,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  actionsLabel: {
+    fontSize: 20,
+    color: '#007aff',
+  },
+  paginationView: {
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+  },
+  defaultView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  defaultViewTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  row: {
+    padding: 10,
+    height: 50,
+  },
+  header: {
+    backgroundColor: '#007aff',
+    padding: 1,
+  },
+  headerTitle: {
+    color: '#fff',
+  },
+};
+
+var screenStyles = {
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
+  navBar: {
+    height: 64,
+    backgroundColor: '#007aff',
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navBarTitle: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 12,
+  }
+};
 
