@@ -21,10 +21,41 @@ export default class ListCompontent extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      token:null,
       data:{
-        time:null
+        time:'',
+        id:null,
+        userId:null,
+        content:null,
+        type:null,
+        source:null,
+        location:null,
       }
     };
+  }
+
+  componentDidMount() {
+
+    
+    storage.load({
+      key: 'loginState',
+      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
+      autoSync: true,
+      // syncInBackground(默认为true)意味着如果数据过期，
+      // 在调用同步方法的同时先返回已经过期的数据。
+      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
+      syncInBackground: true
+      }).then(ret => {
+        //如果找到数据，则在then方法中返回
+        console.log(ret.userid);
+        this.setState({username:ret.userid,token:ret.token})
+
+        this._fetch();
+      }).catch(err => {
+        //如果没有找到数据且没有同步方法，
+        //或者有其他异常，则在catch中返回
+        //console.warn(err);
+      })
   }
 
   /**
@@ -36,34 +67,58 @@ export default class ListCompontent extends Component{
    */
   _onFetch(page = 1, callback, options) {
    
-    let url = page ===1 ? Config.postListApi : Config.postListApi + this.state.time 
-    fetch(url)
-      .then((response) => response.json())
-      .then((responseData) => {
-            if(responseData.code === 0){
-              let obj = responseData.data
+    let url = page ===1 ? Config.postListApi : Config.postListApi + '?date='+this.state.time 
+    let token  = null;
+    storage.load({
+      key: 'loginState',
+      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
+      autoSync: true,
+      // syncInBackground(默认为true)意味着如果数据过期，
+      // 在调用同步方法的同时先返回已经过期的数据。
+      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
+      syncInBackground: true
+      }).then(ret => {
+        token = ret.token
 
-              // TODO
-              if (obj.length === 0) {
-                callback([]);
-                return;
-              };
+        fetch(url,{
+            headers: {
+              'Auth-Token':token,
+            }
+          })
+          .then((response) => response.json())
+          .then((responseData) => {
+                if(responseData.code === 0){
+                  let obj = responseData.data
 
-              // if( obj.length > 0 ){
-              //   this.setState({time:obj[obj.length - 1].createTime})
-              //   if( obj.length  < Config.pageSize -1 ){
-              //     callback(obj, {allLoaded: true})
-              //   }else{
-              //     callback(obj);
-              //   }
-              // }else{
-              //   callback(obj, {allLoaded: true})
-              // }
-           }else{
-              console.log('error');
-           }
+                  if (obj.length === 0) {
+                    callback([]);
+                    return;
+                  };
+
+                  if( obj.length > 0 ){
+                    this.setState({time:obj[obj.length - 1].time})
+                    if( obj.length  < Config.pageSize -1 ){
+                      callback(obj, {allLoaded: true})
+                    }else{
+                      callback(obj);
+                    }
+                  }else{
+                    callback(obj, {allLoaded: true})
+                  }
+               }else{
+                  console.log('error');
+               }
+          })
+          .done();
+
+      }).catch(err => {
+        //如果没有找到数据且没有同步方法，
+        //或者有其他异常，则在catch中返回
+        //console.warn(err);
       })
-      .done();
+
+
+   
   }
 
 
@@ -86,13 +141,17 @@ export default class ListCompontent extends Component{
    * @param {object} rowData Row data
    */
   _renderRowView(rowData) {
+
     return (
       <TouchableHighlight
         style={customStyles.row}
         underlayColor='#c8c7cc'
         onPress={() => this._onPress(rowData.id)}
       >
-        <Text>{rowData.id}</Text>
+      <View style={{border:1}}>
+        <Text>{rowData.content}</Text>
+        <Text>{rowData.time}</Text>
+      </View>
       </TouchableHighlight>
     );
   }
