@@ -22,7 +22,7 @@ global.storage = storage;
 
 //const serviceUrl = 'http://192.168.1.201:8888/v1/' //本地url
 // const serviceUrl = 'http://192.168.1.101:8889/v1/' //jay desktop
-const serviceUrl = 'http://192.16.2.190:8889/v1/'       //jay
+const serviceUrl = 'http://192.16.2.243:8889/v1/'       //jay
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
@@ -36,6 +36,7 @@ export default {
 
   pageSize:10,
 
-  postListApi: serviceUrl + 'post/list/'
+  postListApi: serviceUrl + 'post/list/',
+  postApi: serviceUrl + '1post/add1111111/'
 
 };

@@ -43,6 +43,9 @@ export default class Login extends Component {
 
   // 获取数据方法
     fetchData() {
+
+      Alert.alert('',Config.loginUrl)
+
       fetch(Config.loginUrl,{
         headers: {
           'Username': this.state.username,
