@@ -150,20 +150,26 @@ export default class ListCompontent extends Component{
     }
     
     return (
-      <TouchableHighlight
-        style={customStyles.row}
-        underlayColor='#c8c7cc'
-      >
-      <View style={{border:1}}>
-        <Text>{rowData.content}</Text>
-        <Text>{rowData.time}</Text>
-         <Image
-               source={{uri:souce}}
-              style={[styles.thumbnail]}
+        <View style={{flexDirection:'column'}}>
+          <TouchableHighlight
+            style={customStyles.row}
+            underlayColor='#c8c7cc'
+          >
+          <View style={{border:1,flexDirection:'row'}}>
+            <Image
+                source={{uri:souce}}
+                style={[styles.thumbnail]}
             />
-        
-      </View>
-      </TouchableHighlight>
+            <View style={[styles.flex]}>
+              <Text style={{fontSize: 10,marginTop:5}}>{rowData.content}</Text>
+              <Text style={{fontSize: 10,marginTop:5}}>{rowData.time}</Text>
+            </View>
+          </View>
+
+          </TouchableHighlight>
+          <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+        </View>
+
     );
   }
 
@@ -340,8 +346,8 @@ var customStyles = {
     alignItems: 'center',
   },
   actionsLabel: {
-    fontSize: 20,
-    color: '#007aff',
+    fontSize: 14,
+    color: '#AEB1AB',
   },
   paginationView: {
     height: 44,
@@ -397,9 +403,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#eee',
     },
     thumbnail :{
-      width: 40,
-      height: 40,
-      marginRight:10,
+      width: 55,
+      height: 55,
+      marginRight:5,
       justifyContent: 'center',
       marginTop:7,
   },
@@ -417,5 +423,9 @@ const styles = StyleSheet.create({
     marginLeft:10,
     alignSelf: 'center',
   },
+  flex:{
+    flex:1,
+  }
+
 });
 

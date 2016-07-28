@@ -61,14 +61,17 @@ export default class CreateDynamic extends Component {
                         <Text style= {styles.text}>{route.title}</Text>
                     </View>
 
-                    <TouchableOpacity onPress={this._submits.bind(this)} style= {styles.tabRight}>
-                        <View style={{height: 48,flex: 1}}/>
-                        <Text style= {styles.text}>发表</Text>
-                    </TouchableOpacity>
+                    <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+                        <TouchableOpacity onPress={this._submits.bind(this)} style= {styles.tabRight}>
+                            <View style={{height: 48,flex: 1}}/>
+                            <Text style={{fontSize: 16,color: 'white',fontWeight: '300',}}>发     表</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
 
 
-                <View  style={{height: 120, borderColor: 'gray', borderWidth: 0}}>
+                <View  style={{height: 320, borderColor: '#F0F9FF', borderWidth: 0}}>
                     <TextInput
                         onChangeText={(data) => this.setState({data})}
                         value={this.state.data}
