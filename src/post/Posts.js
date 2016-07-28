@@ -5,13 +5,15 @@ import {
   View,
   TouchableHighlight,
   Platform,
-  Alert
+  Alert,
+  Image,
+  Styles
 } from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
 var GiftedSpinner = require('react-native-gifted-spinner');
 
-import ToolBar from '../common/ToolBar'
+import ToolBar from '../common/ToolBar2'
 import Config from '../Config'
 // 禁掉黄色警告
 console.disableYellowBox = true;
@@ -141,20 +143,31 @@ export default class ListCompontent extends Component{
    * @param {object} rowData Row data
    */
   _renderRowView(rowData) {
-
+     let souce = null
+    if(rowData.source !=null){
+       souce = rowData.source[0]
+       souce = Config.fileUrl + souce
+    }
+    
     return (
       <TouchableHighlight
         style={customStyles.row}
         underlayColor='#c8c7cc'
-        onPress={() => this._onPress(rowData.id)}
       >
       <View style={{border:1}}>
         <Text>{rowData.content}</Text>
         <Text>{rowData.time}</Text>
+         <Image
+               source={{uri:souce}}
+              style={[styles.thumbnail]}
+            />
+        
       </View>
       </TouchableHighlight>
     );
   }
+
+
 
   /**
    * Render the refreshable view when waiting for refresh
@@ -348,7 +361,7 @@ var customStyles = {
   },
   row: {
     padding: 10,
-    height: 50,
+    
   },
   header: {
     backgroundColor: '#007aff',
@@ -377,4 +390,32 @@ var screenStyles = {
     marginTop: 12,
   }
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#eee',
+    },
+    thumbnail :{
+      width: 40,
+      height: 40,
+      marginRight:10,
+      justifyContent: 'center',
+      marginTop:7,
+  },
+    item: {
+    marginTop:10,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    height:45,
+    justifyContent: 'center',
+  }, 
+   item1: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft:10,
+    alignSelf: 'center',
+  },
+});
 

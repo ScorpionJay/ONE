@@ -21,6 +21,35 @@ import ToolBar from '../common/ToolBar'
 
 import Config from '../Config'
 
+import ImagePicker from 'react-native-image-picker'
+
+const options = {
+  title: '选择照片', // specify null or empty string to remove the title
+  cancelButtonTitle: '取消',
+  takePhotoButtonTitle: '拍照', // specify null or empty string to remove this button
+  chooseFromLibraryButtonTitle: '选择照片', // specify null or empty string to remove this button
+  // customButtons: {
+  //   'Choose Photo from Facebook': 'fb', // [Button Text] : [String returned upon selection]
+  // },
+  cameraType: 'back', // 'front' or 'back'
+  mediaType: 'photo', // 'photo' or 'video'
+  videoQuality: 'high', // 'low', 'medium', or 'high'
+  durationLimit: 10, // video recording max time in seconds
+  maxWidth: 100, // photos only
+  maxHeight: 100, // photos only
+  aspectX: 2, // android only - aspectX:aspectY, the cropping image's ratio of width to height
+  aspectY: 1, // android only - aspectX:aspectY, the cropping image's ratio of width to height
+  quality: 0.2, // 0 to 1, photos only
+  angle: 0, // android only, photos only
+  allowsEditing: false, // Built in functionality to resize/reposition the image after selection
+  noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
+  storageOptions: { // if this key is provided, the image will get saved in the documents directory on ios, and the pictures directory on android (rather than a temporary directory)
+    skipBackup: true, // ios only - image will NOT be backed up to icloud
+    path: 'images' // ios only - will save image at /Documents/images rather than the root
+  }
+};
+
+
 export default class Post extends Component {
 
   constructor(props) {
@@ -28,7 +57,9 @@ export default class Post extends Component {
 
     this.state = {
       token:null,
-      content:''
+      content:'',
+      picture:'',
+      pic:null,
     };
   }
 
@@ -59,16 +90,21 @@ export default class Post extends Component {
       const {content,token} = this.state
        
 
-       fetch(Config.postApi, {
+      var data = new FormData()
+      //data.append('file', response.uri)
+      if(this.state.picture !== ''){
+         data.append('file', {uri: this.state.picture, name: "test", type: 'image/jpg'});
+      }
+      
+      data.append('content', content)
+
+       fetch(Config.postApi2, {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+           "Content-Type": " multipart/form-data ",
           'Auth-Token':token,
         },
-        body: JSON.stringify({
-          content: content
-        })
+        body: data
       })
       .then((response) => response.json())
       .then((responseData) =>{
@@ -84,7 +120,7 @@ export default class Post extends Component {
       })
       .catch(function(ex) {
         console.log('parsing failed', ex)
-        ToastAndroid.show('请求失败', ToastAndroid.SHORT)
+        ToastAndroid.show('请求失败'+ex, ToastAndroid.SHORT)
       })
 
 
@@ -102,6 +138,80 @@ export default class Post extends Component {
   }
 
 
+  imageHandler(){
+    ImagePicker.showImagePicker(options, (response) => {
+    console.log('Response = ', response);
+
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    }
+    else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    }
+    else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    }
+    else {
+      // // You can display the image using either data:
+      // const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+
+      // // uri (on iOS)
+      // const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+      // uri (on android)
+      const source = {uri: response.uri, isStatic: true};
+      // Alert.alert('pic',response.uri)
+      this.setState({
+        picture: response.uri,
+        pic:source
+      });
+
+
+      // 这里上传？？？
+      //var input = document.querySelector('input[type="file"]')
+
+      var data = new FormData()
+      //data.append('file', response.uri)
+      data.append('file', {uri: response.uri, name: "test", type: 'image/jpg'});
+      
+     // Alert.alert('',Config.fileUpload + response.uri)
+      // fetch(Config.postApiTest, {
+      //   method: 'POST',
+      //   headers: {
+      //       "Content-Type": " multipart/form-data ",
+      //       'Auth-Token': this.state.token
+      //   },
+      //   body: data
+      // }).then((data)=> data.json() )
+      //   .then((jsonData) =>{
+      //     Alert.alert('pic',JSON.stringify(jsonData))
+      //     if(jsonData.code === 0){
+      //         this.setState({
+      //           avatarSource: Config.fileUrl + jsonData.data
+      //         });
+      //         ToastAndroid.show(jsonData.msg, ToastAndroid.SHORT)
+      //     }else if(jsonData.status === 401){
+      //         // token过期 重新登录
+      //         ToastAndroid.show('帐号过期，重新登录', ToastAndroid.SHORT)
+      //         // 删除本地的
+      //         this.props.navigator.push({
+      //             id:'login',
+      //             title:'登录',
+      //             params: {
+      //               username: username
+      //             }
+      //           }
+      //         )
+      //     }
+      //     else{
+      //       ToastAndroid.show('上传失败', ToastAndroid.SHORT)
+      //     }
+      //   })
+
+    }
+  });
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -114,6 +224,15 @@ export default class Post extends Component {
                       textAlign='center'
                       value={this.state.content}
                       onChangeText={(content) => this.setState({content})}/>
+
+          <TouchableOpacity style={styles.item} onPress={this.imageHandler.bind(this)}>
+                <Text style={styles.item1}>照片</Text>
+                 <Image
+                   source={{uri: this.state.picture}}
+                  style={[styles.thumbnail]}
+                />
+          </TouchableOpacity>            
+
 
            <TouchableHighlight
                     onPress={() => this.post()}
@@ -131,7 +250,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#eee',
-    }
+    },
+    thumbnail :{
+      width: 40,
+      height: 40,
+      marginRight:10,
+      justifyContent: 'center',
+      marginTop:7,
+  },
+    item: {
+    marginTop:10,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    height:45,
+    justifyContent: 'center',
+  }, 
+   item1: {
+    flex: 1,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft:10,
+    alignSelf: 'center',
+  },
 });
 
 

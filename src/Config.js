@@ -37,6 +37,10 @@ export default {
   pageSize:10,
 
   postListApi: serviceUrl + 'post/list/',
-  postApi: serviceUrl + '1post/add1111111/'
+  postApi: serviceUrl + 'post/add/',
+
+  postApiTest: serviceUrl + 'file/singleSave/',
+
+  postApi2: serviceUrl + 'post/post/'
 
 };

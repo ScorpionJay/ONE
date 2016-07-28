@@ -178,41 +178,17 @@ export default class Me extends Component {
 
                       <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
-                    <TouchableOpacity style={styles.item} onPress={()=>this._post()}>
-                        <View style={styles.item1}>
-                          <Icon name="picture-o" size={20} color="#238CFE" />
-                          <Text style={{marginLeft:5}}>Post</Text>
-                        </View>
-
-                        <View style={styles.item3}>
-                            <Icon name="angle-right" size={25} color="#aaa" />
-                        </View>
-                    </TouchableOpacity>
-
-                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
                     <TouchableOpacity style={styles.item} onPress={()=>this._posts()}>
                         <View style={styles.item1}>
                           <Icon name="picture-o" size={20} color="#238CFE" />
-                          <Text style={{marginLeft:5}}>动态</Text>
+                          <Text style={{marginLeft:5}}>相册</Text>
                         </View>
 
                         <View style={styles.item3}>
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
-                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
-
-                      <TouchableOpacity style={styles.item} onPress={()=>this._createDynamic()}>
-                          <View style={styles.item1}>
-                              <Icon name="picture-o" size={20} color="#238CFE" />
-                              <Text style={{marginLeft:5}}>发表动态</Text>
-                          </View>
-
-                          <View style={styles.item3}>
-                              <Icon name="angle-right" size={25} color="#aaa" />
-                          </View>
-                      </TouchableOpacity>
                       <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
 
