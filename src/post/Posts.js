@@ -149,7 +149,9 @@ export default class ListCompontent extends Component{
        souce = Config.fileUrl + souce
     }
     
-    return (
+    if( rowData.type === Config.word ){
+      // render word
+      return (
       <TouchableHighlight
         style={customStyles.row}
         underlayColor='#c8c7cc'
@@ -157,14 +159,25 @@ export default class ListCompontent extends Component{
       <View style={{border:1}}>
         <Text>{rowData.content}</Text>
         <Text>{rowData.time}</Text>
-         <Image
-               source={{uri:souce}}
-              style={[styles.thumbnail]}
-            />
-        
       </View>
       </TouchableHighlight>
     );
+    }else{
+      // render picture
+      return (
+      <TouchableHighlight
+        style={customStyles.row}
+        underlayColor='#c8c7cc'
+      >
+      <View style={{border:1}}>
+        <Text>{rowData.content}</Text>
+        <Image source={{uri:souce}} style={[styles.thumbnail]}/>
+        <Text>{rowData.time}</Text>
+      </View>
+      </TouchableHighlight>
+    );
+    }
+
   }
 
 
@@ -361,7 +374,8 @@ var customStyles = {
   },
   row: {
     padding: 10,
-    
+    backgroundColor: '#ddd',
+    marginTop:5,
   },
   header: {
     backgroundColor: '#007aff',
@@ -397,8 +411,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#eee',
     },
     thumbnail :{
-      width: 40,
-      height: 40,
+      width: 80,
+      height: 80,
       marginRight:10,
       justifyContent: 'center',
       marginTop:7,

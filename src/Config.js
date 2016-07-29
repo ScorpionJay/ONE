@@ -17,12 +17,12 @@ const storage = new Storage({
 })  
 global.storage = storage;
 
-//const serviceUrl = 'http://scorpioner.xicp.net/v1/' //测试url
+const serviceUrl = 'http://wind.zicp.net/v1/' //测试url
 //const serviceUrl = 'http://192.168.1.201:8080/spring-security-1.0/v1/'
 
 //const serviceUrl = 'http://192.168.1.201:8888/v1/' //本地url
 // const serviceUrl = 'http://192.168.1.101:8889/v1/' //jay desktop
-const serviceUrl = 'http://192.16.2.243:8889/v1/'       //jay
+//const serviceUrl = 'http://192.16.2.243:8889/v1/'       //jay
 export default {
   initTab:'Home',
   loginUrl:serviceUrl,
@@ -41,6 +41,10 @@ export default {
 
   postApiTest: serviceUrl + 'file/singleSave/',
 
-  postApi2: serviceUrl + 'post/post/'
+  postApi2: serviceUrl + 'post/post/',
+
+
+  word:'WORD',
+  picture:'PICTURE'
 
 };
