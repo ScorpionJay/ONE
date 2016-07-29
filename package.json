@@ -17,6 +17,7 @@
     "react-native-prompt": "^0.18.5",
     "react-native-storage": "^0.1.1",
     "react-native-tab-navigator": "^0.3.2",
-    "react-native-vector-icons": "^2.0.3"
+    "react-native-vector-icons": "^2.0.3",
+    "react-native-video": "^0.8.0"
   }
 }
