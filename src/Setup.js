@@ -13,6 +13,7 @@ import Home from './home/Home'
 import NewsList from './home/NewsList'
 import Detail from './home/Detail'
 import Third from './home/Third'
+import MenuDetial from './home/MenuDetial'
 
 import Me from './me/Me'
 import Account from './me/Account'
@@ -56,6 +57,9 @@ export default class Setup extends Component {
       case  'third':
             return <Third navigator={navigator} route={route}/>
             break;
+      case  'menuDetial':
+            return <MenuDetial navigator={navigator} route={route}/>
+            break
 
       // me
       case  'me':

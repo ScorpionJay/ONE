@@ -15,29 +15,39 @@ export default class ListItemCompontent extends Component{
 
 	constructor(props) {
 	  super(props);
-	  this.state = {};
+	  this.state = {
+	  };
 	}
 
-	handler(){
+	handler(item_data){
 		const {navigator,router} = this.props
+		//navigator.push({
+		//	title:'文章',
+		//	id:'newsList',
+		//	params: {
+         //       id: this.props.data.id
+         //   }
+		//})
 		navigator.push({
-			title:'文章',
-			id:'newsList',
-			params: {
-                id: this.props.data.id
-            }
-		})
+				title:'文章',
+				id:'menuDetial',
+				params:{
+					name:item_data.name,
+					description:item_data.description
+				},
+			}
+		);
 	}
 
 	render() {
-		const {name,description} = this.props.data
+		const item_data= this.props.data
 		
 		return (
 			<View>
-				<TouchableOpacity onPress={this.handler.bind(this)}>
+				<TouchableOpacity onPress={this.handler.bind(this,item_data)}>
 	                <View style={styles.container} >
 						<View style={styles.name}>
-							<Text style={styles.nameTitle}>{name}</Text>
+							<Text style={styles.nameTitle}>{item_data.name}</Text>
 						</View>
 						<View style={styles.desc}>
 							<Text style={styles.descTitle}>
