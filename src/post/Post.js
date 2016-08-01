@@ -88,7 +88,10 @@ export default class Post extends Component {
   post(){
 
       const {content,token} = this.state
-       
+      if(content==''||content==undefined){
+          ToastAndroid.show('动态内容不能为空...', ToastAndroid.SHORT);
+          return;
+      }
 
       var data = new FormData()
       //data.append('file', response.uri)
@@ -217,29 +220,35 @@ export default class Post extends Component {
       <View style={styles.container}>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
 
-          <TextInput  placeholder='说点什么吧' placeholderTextColor="#aaa"
-                      autoFocus={true}
-                      numberOfLines={1}
-                      underlineColorAndroid={'transparent'}
-                      textAlign='center'
-                      value={this.state.content}
-                      onChangeText={(content) => this.setState({content})}/>
+          <View style={styles.style_input_m}>
+              <TextInput  placeholder='说点什么吧'
+                          placeholderTextColor="#aaa"
+                          style={styles.style_input}
+                          autoFocus={true}
+                          numberOfLines={1}
+                          underlineColorAndroid={'transparent'}
+                          textAlign='center'
+                          value={this.state.content}
+                          onChangeText={(content) => this.setState({content})}/>
+          </View>
+
 
           <TouchableOpacity style={styles.item} onPress={this.imageHandler.bind(this)}>
-                <Text style={styles.item1}>照片</Text>
+              <Text style={styles.item1}>选择照片</Text>
                  <Image
                    source={{uri: this.state.picture}}
-                  style={[styles.thumbnail]}
+                   style={[styles.thumbnail]}
                 />
-          </TouchableOpacity>            
+          </TouchableOpacity>
 
-
-           <TouchableHighlight
-                    onPress={() => this.post()}
-                    underlayColor={'#999'}
-                    style={{height: 48,alignItems: 'center',justifyContent:'center'}}>
-                    <Text>发表</Text>
-                </TouchableHighlight>           
+          <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+              <TouchableHighlight
+                  onPress={() => this.post()}
+                  underlayColor={'#999'}
+                  style={{height: 48,alignItems: 'center',justifyContent:'center'}}>
+                  <Text  style={{color: 'white'}}>发  表</Text>
+              </TouchableHighlight>
+          </View>
 
       </View>
     )
@@ -252,8 +261,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#eee',
     },
     thumbnail :{
-      width: 40,
-      height: 40,
+      width: 60,
+      height: 60,
       marginRight:10,
       justifyContent: 'center',
       marginTop:7,
@@ -262,7 +271,7 @@ const styles = StyleSheet.create({
     marginTop:10,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    height:45,
+    height:80,
     justifyContent: 'center',
   }, 
    item1: {
@@ -272,6 +281,20 @@ const styles = StyleSheet.create({
     marginLeft:10,
     alignSelf: 'center',
   },
+    style_input_m:{
+        backgroundColor:'#eee',
+        height:200,
+        flexDirection:'row',
+        flexWrap:'wrap',
+        justifyContent:'flex-start',
+        alignItems: 'flex-start',
+    },
+    style_input:{
+        flex: 1,
+        backgroundColor:'#eee',
+        height:40,
+    },
+
 });
 
 

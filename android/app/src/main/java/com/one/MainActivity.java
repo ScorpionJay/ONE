@@ -1,16 +1,18 @@
 package com.one;
 
 import com.facebook.react.ReactActivity;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.imagepicker.ImagePickerPackage; // import package
-import com.oblador.vectoricons.VectorIconsPackage;
+import com.imagepicker.ImagePickerPackage; 
+
+import com.brentvatne.react.ReactVideoPackage;
 
 
 public class MainActivity extends ReactActivity {
@@ -41,10 +43,11 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new RNDeviceInfo(),
             new VectorIconsPackage(),
-            new ImagePickerPackage() // Add package
-            // , new VectorIconsPackage()
+            new RNDeviceInfo(),
+            new ImagePickerPackage(), 
+            new ReactVideoPackage()
+           
         );
     }
 }

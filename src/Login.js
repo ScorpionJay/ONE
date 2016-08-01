@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
     style_pwd_input:{
         backgroundColor:'#fff',
         height:35,
+        justifyContent:'flex-start',
     },
 
 });
