@@ -7,7 +7,7 @@ import {
   Platform,
   Alert,
   Image,
-  Styles
+  Styles,ToastAndroid,
 } from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
@@ -127,15 +127,15 @@ export default class ListCompontent extends Component{
   /**
    * 点击
    */
-  _onPress(id) {
+  _onPress(item_data) {
     const {navigator,router} = this.props
     navigator.push({
-      title:'详情',
-      id:'detail',
-      params: {
-                id: id
-            }
+      title:'动态详情',
+      id:'dynamicDetail',
+      params: item_data,
     })
+
+
   }
 
   /**
@@ -143,34 +143,59 @@ export default class ListCompontent extends Component{
    * @param {object} rowData Row data
    */
   _renderRowView(rowData) {
-     let souce = null
-    if(rowData.source !=null){
-       souce = rowData.source[0]
-       souce = Config.fileUrl + souce
-    }
-    
-    return (
-        <View style={{flexDirection:'column'}}>
-          <TouchableHighlight
-            style={customStyles.row}
-            underlayColor='#c8c7cc'
-          >
-          <View style={{border:1,flexDirection:'row'}}>
-            <Image
-                source={{uri:souce}}
-                style={[styles.thumbnail]}
-            />
-            <View style={[styles.flex]}>
-              <Text style={{fontSize: 10,marginTop:5}}>{rowData.content}</Text>
-              <Text style={{fontSize: 10,marginTop:5}}>{rowData.time}</Text>
-            </View>
+    let source = rowData.source;
+    if(source==''||source==undefined){
+      return (
+          <View style={{flexDirection:'column'}}>
+            <TouchableHighlight
+                style={customStyles.row}
+                underlayColor='#c8c7cc'
+                onPress={this._onPress.bind(this,rowData)}
+            >
+              <View style={{border:1,flexDirection:'row'}}>
+                <Image
+                    source={require('../images/ic_img_loading.png')}
+                    style={[styles.thumbnail]}
+                />
+                <View style={[styles.flex]}>
+                  <Text style={{fontSize: 10,marginTop:5}}>{rowData.content}</Text>
+                  <Text style={{fontSize: 10,marginTop:5}}>{rowData.time}</Text>
+                </View>
+              </View>
+
+            </TouchableHighlight>
+            <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
           </View>
+      );
 
-          </TouchableHighlight>
-          <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
-        </View>
+    }else{
+      let imageURL = Config.fileUrl + source;
+      return (
+          <View style={{flexDirection:'column'}}>
+            <TouchableHighlight
+                style={customStyles.row}
+                underlayColor='#c8c7cc'
+                onPress={this._onPress.bind(this,rowData)}
+            >
+              <View style={{border:1,flexDirection:'row'}}>
+                <Image
+                    source={{uri:imageURL}}
+                    style={[styles.thumbnail]}
+                />
+                <View style={[styles.flex]}>
+                  <Text style={{fontSize: 10,marginTop:5}}>{rowData.content}</Text>
+                  <Text style={{fontSize: 10,marginTop:5}}>{rowData.time}</Text>
+                </View>
+              </View>
 
-    );
+            </TouchableHighlight>
+            <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+          </View>
+      );
+    }
+
+
+
   }
 
 

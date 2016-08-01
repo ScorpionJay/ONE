@@ -22,6 +22,7 @@ import About from './me/About'
 
 import Post from './post/Post'
 import Posts from './post/Posts'
+import DynamicDetial from './post/DynamicDetial'
 
 import CreateDynamic from './find/CreateDynamic'
 
@@ -83,6 +84,9 @@ export default class Setup extends Component {
             break;
       case  'CreateDynamic':
             return <CreateDynamic navigator={navigator} route={route}/>
+            break
+      case 'dynamicDetail':
+            return <DynamicDetial navigator={navigator} route={route}/>
             break
     }
   }
