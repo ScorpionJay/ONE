@@ -113,7 +113,6 @@ export default class Me extends Component {
       this.props.navigator.push({
         title:'动态',
         id:'posts',
-       
       })
     }
 
@@ -133,6 +132,16 @@ export default class Me extends Component {
 
     _favHandler(){
       Alert.alert('','开发中');
+    }
+
+    _colletArticles(){
+        const {navigator} =this.props;
+        if(navigator){
+            navigator.push({
+                title:'本地文章',
+                id:'articleCollects',
+            });
+        }
     }
 
     _accountHandler(){
@@ -202,6 +211,18 @@ export default class Me extends Component {
                             <Icon name="angle-right" size={25} color="#aaa" />
                         </View>
                     </TouchableOpacity>
+                      <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
+
+                      <TouchableOpacity style={styles.item} onPress={()=>this._colletArticles()}>
+                          <View style={styles.item1}>
+                              <Icon name="cube" size={20} color="#238CFE" />
+                              <Text style={{marginLeft:5}}>本地文章</Text>
+                          </View>
+
+                          <View style={styles.item3}>
+                              <Icon name="angle-right" size={25} color="#aaa" />
+                          </View>
+                      </TouchableOpacity>
                       <View style={{height:1,backgroundColor:'#f4f4f4'}}/>
 
                     <TouchableOpacity style={styles.item} onPress={()=>this.handler()}>

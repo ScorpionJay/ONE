@@ -10,12 +10,13 @@ import {
     TouchableOpacity,
     Alert,
     ScrollView,
-    TouchableHighlight,
+    TouchableHighlight,ToastAndroid,
     Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ToolBar from '../common/ToolBar'
 import Config from '../Config'
+import {addArticleAction,getArticleListAction} from '../actions/ArticlesAction'
 export default class DynamicDetial extends Component{
     // 构造
     constructor(props) {
@@ -38,6 +39,26 @@ export default class DynamicDetial extends Component{
         });
     }
 
+    //添加收藏
+    addArticle(){
+        //const {content,time,source} = this.state.item_data;
+        addArticleAction(this.state.item_data.content,'source','source');
+        ToastAndroid.show( '收藏成功', ToastAndroid.SHORT);
+
+    }
+
+    //获取文章列表
+    getArticles(){
+        let datas = getArticleListAction();
+        let list = datas.data;
+        if(list){
+            ToastAndroid.show( '收藏了'+list.length+'条数据', ToastAndroid.SHORT);
+        }else{
+            ToastAndroid.show( '暂无收藏结果', ToastAndroid.SHORT);
+        }
+
+    }
+
     render() {
         const {content,time,source} = this.state.item_data;
 
@@ -49,7 +70,7 @@ export default class DynamicDetial extends Component{
                     <TouchableHighlight
                         style={styles.row}
                         underlayColor='#c8c7cc'
-                    >
+                      >
                         <View style={{border:1,flexDirection:'row'}}>
                             <Image
                                 source={require('../images/ic_img_loading.png')}
@@ -62,6 +83,25 @@ export default class DynamicDetial extends Component{
                         </View>
                     </TouchableHighlight>
                 </View>
+                    <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+                    <TouchableHighlight
+                            style={styles.btn_collect}
+                            underlayColor='#c8c7cc'
+                            onPress={() => this.addArticle()}
+                            >
+                            <Text style={{fontSize: 16,color: 'white',fontWeight: '300',}}>添加收藏</Text>
+                        </TouchableHighlight>
+                    </View>
+                    <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+                        <TouchableHighlight
+                            style={styles.btn_collect}
+                            underlayColor='#c8c7cc'
+                            onPress={() => this.getArticles()}
+                        >
+                            <Text style={{fontSize: 16,color: 'white',fontWeight: '300',}}>查看收藏</Text>
+                        </TouchableHighlight>
+                    </View>
+
                 </View>
             );
 
@@ -87,6 +127,25 @@ export default class DynamicDetial extends Component{
                         </View>
                     </TouchableHighlight>
                 </View>
+                    <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+                        <TouchableHighlight
+                            style={styles.btn_collect}
+                            underlayColor='#c8c7cc'
+                            onPress={() => this.addArticle()}
+                        >
+                            <Text style={{fontSize: 16,color: 'white',fontWeight: '300',}}>添加收藏</Text>
+                        </TouchableHighlight>
+                    </View>
+
+                    <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
+                        <TouchableHighlight
+                            style={styles.btn_collect}
+                            underlayColor='#c8c7cc'
+                            onPress={() => this.getArticles()}
+                        >
+                            <Text style={{fontSize: 16,color: 'white',fontWeight: '300',}}>查看收藏</Text>
+                        </TouchableHighlight>
+                    </View>
                 </View>
             );
         }
@@ -116,6 +175,11 @@ const styles = StyleSheet.create({
     },
     row: {
         padding: 10,
+    },
+    btn_collect: {
+        padding: 10,
+        alignItems: 'center',
+        justifyContent:'center',
     },
     thumbnail :{
         width: 55,
