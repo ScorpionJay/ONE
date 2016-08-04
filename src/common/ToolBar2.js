@@ -23,14 +23,10 @@ export default class ToolBar extends Component {
   }
 
   _post(){
-    //this.props.navigator.replace({
-    //    title:'发表',
-    //    id:'post',
-    //  })
-    this.props.navigator.push({
-          title:'发表',
-          id:'post',
-        })
+    this.props.navigator.replace({
+       title:'发表',
+       id:'post',
+     })
   }
   
 

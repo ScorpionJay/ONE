@@ -54,7 +54,7 @@ export default class Register extends Component{
         if(responseData.code === 0){
           ToastAndroid.show('注册成功', ToastAndroid.SHORT)
 
-          this.props.navigator.push(
+          this.props.navigator.replace(
             {
               id:'login',
               title:'登录',

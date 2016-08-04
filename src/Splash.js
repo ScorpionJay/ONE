@@ -33,7 +33,7 @@ export default class Splash extends Component {
         //如果找到数据，则在then方法中返回
         console.log(ret.userid);
         // Alert.alert('',ret.userid);
-        this.props.navigator.push({
+        this.props.navigator.replace({
                     title: '首页',
                     id: 'main'
                   })
@@ -42,7 +42,7 @@ export default class Splash extends Component {
         //或者有其他异常，则在catch中返回
         //console.warn(err);
 
-        navigator.push({
+        navigator.replace({
           id: 'login',
           title: '登录'
         })

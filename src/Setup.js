@@ -25,8 +25,6 @@ import Posts from './post/Posts'
 import ArticleCollects from './post/ArticleCollects'
 import DynamicDetial from './post/DynamicDetial'
 
-import CreateDynamic from './find/CreateDynamic'
-
 import Storage from 'react-native-storage'
 
 export default class Setup extends Component {

@@ -69,7 +69,7 @@ export default class Login extends Component {
                 expires: 1000 * 3600
               });  
 
-              this.props.navigator.push({
+              this.props.navigator.replace({
                     title: '首页',
                     id: 'main'
               })
