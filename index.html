@@ -2,13 +2,15 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Welcome to ONE</title>
-	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>ONE APP</title>
+	<meta name="author" content="jay" />
 	<meta name="description" content="ONE" />
 	<meta name="keywords"  content="ONE,react native,app" />
 	<meta name="Resource-type" content="Document" />
-
+	<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, user-scalable=no"/>
 
 	<link rel="stylesheet" type="text/css" href="source/javascript.fullPage.css" />
 
@@ -66,7 +68,7 @@
 			color: #F2F2F2;
 		}
 		h1{
-			font-size: 6em;
+			font-size: 5em;
 		}
 		p{
 			font-size: 2em;
@@ -89,6 +91,7 @@
 		#section0 p{
 			color: #333;
 			opacity: 0.4;
+
 		}
 
 
@@ -99,6 +102,7 @@
 		}
 		#section1 h1{
 			color: #fff;
+			font-size: 4em;
 		}
 		#section1 p{
 			opacity: 0.8;
@@ -112,6 +116,7 @@
 		}
 		#section2 h1{
 			color: #F2F2F2;
+			font-size: 3em;
 		}
 		#section2 p{
 			opacity: 0.6;
@@ -129,38 +134,21 @@
 		</div>
 	</div>
 	<div class="section" id="section1">
-		<div class="slide" id="slide1">
-			<div class="content">
-				<h1>A Simple App</h1>
-				<p>
-					you can post picture
-				</p>
-				<p>
-		      		
-				</p>
-			</div>
-		</div>
-		<div class="slide" id="slide2">
-			<div class="content">
-				<h1>Slides too!</h1>
-			</div>
-		</div>
-		<div class="slide" id="slide2">
-			<div class="content">
-				<h1>More slides!</h1>
-			</div>
+		<div class="content">
+			<h1>A Simple App</h1>
 		</div>
 	</div>
 	<div class="section" id="section2">
 		<div class="content">
 			<h1>Download</h1>
-			<p>link or QRCode</p>
+			<img src="source/qrcode.png" style="margin-top:2em;border:5px solid #ffffff" />
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript" src="source/javascript.fullPage.js"></script>
 <script type="text/javascript">
+	document.body.addEventListener('touchstart', function () {});  
 	fullpage.initialize('#fullpage', {
 		anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
 		menu: '#menu',
