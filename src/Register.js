@@ -67,35 +67,6 @@ export default class Register extends Component{
         }else{
           ToastAndroid.show(responseData.msg, ToastAndroid.SHORT)
         }
-     // }) {
-
-
-// .then((response) => response.json())
-//         .then((responseData) => {
-           // console.log(response)
-            //const authToken = response.headers.get("Auth-Token");
-            //if(authToken){
-              // Alert.alert('',authToken);
-              // storage.save({
-              //   key: 'loginState',  //注意:请不要在key中使用_下划线符号!
-              //   rawData: { 
-              //     from: 'some other site',
-              //     userid: this.state.username,
-              //     token: authToken
-              //   },
-              //   // 如果不指定过期时间，则会使用defaultExpires参数
-              //   // 如果设为null，则永不过期
-              //   expires: 1000 * 3600
-              // });  
-
-              // this.props.navigator.push({
-              //       title: '首页',
-              //       id: 'main'
-              // })
-
-            // }else{
-            //   Alert.alert('','错误');
-            // }
       })
       .done();
     }

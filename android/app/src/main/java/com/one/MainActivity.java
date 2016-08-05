@@ -6,16 +6,8 @@ import com.imagepicker.ImagePickerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-
 import java.util.Arrays;
 import java.util.List;
-
-import com.imagepicker.ImagePickerPackage; 
-
-import com.brentvatne.react.ReactVideoPackage;
-
-import io.realm.react.RealmReactPackage;
-
 
 public class MainActivity extends ReactActivity {
 
@@ -47,10 +39,7 @@ public class MainActivity extends ReactActivity {
             new MainReactPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo(),
-            new ImagePickerPackage(), 
-            new ReactVideoPackage(),
-            new RealmReactPackage()
-           
+            new ImagePickerPackage()
         );
     }
 }

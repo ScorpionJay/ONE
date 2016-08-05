@@ -16,7 +16,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ToolBar from '../common/ToolBar'
 import Config from '../Config'
-import {addArticleAction,getArticleListAction} from '../actions/ArticlesAction'
 export default class DynamicDetial extends Component{
     // 构造
     constructor(props) {
@@ -42,20 +41,19 @@ export default class DynamicDetial extends Component{
     //添加收藏
     addArticle(){
         //const {content,time,source} = this.state.item_data;
-        addArticleAction(this.state.item_data.content,'source','source');
         ToastAndroid.show( '收藏成功', ToastAndroid.SHORT);
 
     }
 
     //获取文章列表
     getArticles(){
-        let datas = getArticleListAction();
-        let list = datas.data;
-        if(list){
-            ToastAndroid.show( '收藏了'+list.length+'条数据', ToastAndroid.SHORT);
-        }else{
-            ToastAndroid.show( '暂无收藏结果', ToastAndroid.SHORT);
-        }
+        // let datas = getArticleListAction();
+        // let list = datas.data;
+        // if(list){
+        //     ToastAndroid.show( '收藏了'+list.length+'条数据', ToastAndroid.SHORT);
+        // }else{
+        //     ToastAndroid.show( '暂无收藏结果', ToastAndroid.SHORT);
+        // }
 
     }
 

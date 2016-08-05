@@ -22,10 +22,7 @@ import About from './me/About'
 
 import Post from './post/Post'
 import Posts from './post/Posts'
-import ArticleCollects from './post/ArticleCollects'
 import DynamicDetial from './post/DynamicDetial'
-
-import Storage from 'react-native-storage'
 
 export default class Setup extends Component {
 
@@ -86,9 +83,6 @@ export default class Setup extends Component {
             break
       case 'dynamicDetail':
             return <DynamicDetial navigator={navigator} route={route}/>
-            break
-      case 'articleCollects':
-            return <ArticleCollects navigator={navigator} route={route}/>
             break
     }
   }

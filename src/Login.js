@@ -9,8 +9,10 @@ import {
       TouchableOpacity,
       Alert,ToastAndroid,
       Image,
-      TouchableHighlight
+      TouchableHighlight,
+      NetInfo
 } from 'react-native';
+
 import ToolBar from './common/ToolBar'
 import Main from './Main'
 import Config from './Config'
@@ -44,41 +46,55 @@ export default class Login extends Component {
   // 获取数据方法
     fetchData() {
 
-      Alert.alert('',Config.loginUrl)
+      // 需要判断是否联网 https://facebook.github.io/react-native/docs/netinfo.html
+      NetInfo.fetch().done((reach) => {
+        console.log('Initial: ' + reach);
+        ToastAndroid.show('使用的网络' + reach, ToastAndroid.SHORT)
+        if( reach.toUpperCase() === 'NONE' || reach.toUpperCase === 'UNKNOWN' ){
+            ToastAndroid.show('没有网络', ToastAndroid.SHORT)
+        }else{
+          fetch(Config.loginUrl,{
+              headers: {
+                'Username': this.state.username,
+                'Password': this.state.password
+              },
+              method: 'POST'
+            })
+            .then((response) => {
+                  const authToken = response.headers.get("Auth-Token");
+                  if(authToken){
+                    // Alert.alert('',authToken);
+                    storage.save({
+                      key: 'loginState',  //注意:请不要在key中使用_下划线符号!
+                      rawData: { 
+                        from: 'some other site',
+                        userid: this.state.username,
+                        token: authToken
+                      },
+                      // 如果不指定过期时间，则会使用defaultExpires参数
+                      // 如果设为null，则永不过期
+                      expires: 1000 * 3600
+                    });  
 
-      fetch(Config.loginUrl,{
-        headers: {
-          'Username': this.state.username,
-          'Password': this.state.password
-        },
-        method: 'POST'
-      })
-      .then((response) => {
-            const authToken = response.headers.get("Auth-Token");
-            if(authToken){
-              // Alert.alert('',authToken);
-              storage.save({
-                key: 'loginState',  //注意:请不要在key中使用_下划线符号!
-                rawData: { 
-                  from: 'some other site',
-                  userid: this.state.username,
-                  token: authToken
-                },
-                // 如果不指定过期时间，则会使用defaultExpires参数
-                // 如果设为null，则永不过期
-                expires: 1000 * 3600
-              });  
+                    this.props.navigator.replace({
+                          title: '首页',
+                          id: 'main'
+                    })
 
-              this.props.navigator.replace({
-                    title: '首页',
-                    id: 'main'
-              })
+                  }else{
+                    ToastAndroid.show('帐号或密码错误',ToastAndroid.SHORT);
+                  }
+            })
+            .catch(function(ex) {
+              console.log('parsing failed', ex)
+              ToastAndroid.show('请求失败'+ex, ToastAndroid.SHORT)
+            })
+        }
+      });
 
-            }else{
-              Alert.alert('','帐号或密码错误');
-            }
-      })
-      .done();
+
+
+      
     }
 
   render() {
