@@ -212,10 +212,30 @@ export default class Post extends Component {
   }
 
 
+  handle(){
+    const { navigator ,route } = this.props
+    this.props.navigator.replace({
+       title:'动态',
+       id:'posts',
+    })
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-          <ToolBar navigator={this.props.navigator} route={this.props.route}/>
+      <View>
+
+          <View style={styles.tab}>
+              <TouchableOpacity onPress={this.handle.bind(this)} style= {styles.tabLeft}>
+                  <Icon name="angle-left" size={30} color="#fff" />
+                  <Text style= {styles.text}>返回</Text>
+              </TouchableOpacity>
+              <View style= {styles.tabCenter}>
+                
+              </View>
+              <TouchableOpacity onPress={this.post.bind(this)} style= {styles.tabRight}>
+                  <Text style= {{color:'#fff'}}>发送</Text>
+              </TouchableOpacity>
+          </View>
 
           <View style={styles.style_input_m}>
               <TextInput  placeholder='说点什么吧'
@@ -238,15 +258,6 @@ export default class Post extends Component {
                 />
           </TouchableOpacity>
 
-          <View style={{marginTop: 32,marginLeft: 16,marginRight:16,elevation: 4,backgroundColor:'#ff9800'}}>
-              <TouchableHighlight
-                  onPress={() => this.post()}
-                  underlayColor={'#999'}
-                  style={{height: 48,alignItems: 'center',justifyContent:'center'}}>
-                  <Text  style={{color: 'white'}}>发  表</Text>
-              </TouchableHighlight>
-          </View>
-
       </View>
     )
   }
@@ -257,6 +268,45 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#eee',
     },
+    tab: {
+    flexDirection: 'row',
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height:40,
+  },
+  tabLeft: {
+    flex:1,
+    flexDirection: 'row',
+    marginLeft:5,
+  },
+  img:{
+    width:20,
+    height:20,
+  },
+  text: {
+    color: '#fff',
+    alignSelf: 'center',
+    marginLeft:5,
+  },
+  tabCenter:{
+    flex:1,
+  },
+  tabRight: {
+    flex:1,
+    alignItems: 'flex-end',
+    marginRight:5,
+  },
+  container2: {
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    height:40,
+  },
+  tabCenter2:{
+    alignSelf: 'center',
+    color: '#fff',
+    justifyContent: 'center',
+  },
     thumbnail :{
       width: 60,
       height: 60,
