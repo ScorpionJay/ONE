@@ -11,6 +11,7 @@
     "react-native-device-info": "^0.9.3",
     "react-native-gifted-listview": "0.0.15",
     "react-native-image-picker": "^0.19.7",
+    "react-native-lightbox": "^0.6.0",
     "react-native-looped-carousel": "0.0.12",
     "react-native-modal-picker": "0.0.15",
     "react-native-prefix-picker": "^2.0.2",

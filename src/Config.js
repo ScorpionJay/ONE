@@ -45,6 +45,8 @@ export default {
 
   postAll: serviceUrl +  'post/lists',
 
+  thumbnailApi: serviceUrl + 'file/thumbnail/',//缩略图
+
 
   word:'WORD',
   picture:'PICTURE'
