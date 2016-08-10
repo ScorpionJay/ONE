@@ -24,6 +24,9 @@ import Post from './post/Post'
 import Posts from './post/Posts'
 import DynamicDetial from './post/DynamicDetial'
 
+import Webview from './common/Webview'
+
+
 export default class Setup extends Component {
 
   _renderScene(route, navigator){
@@ -83,6 +86,11 @@ export default class Setup extends Component {
             break
       case 'dynamicDetail':
             return <DynamicDetial navigator={navigator} route={route}/>
+            break
+
+
+      case 'webview':
+            return <Webview navigator={navigator} route={route}/>
             break
     }
   }

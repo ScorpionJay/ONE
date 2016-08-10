@@ -3,7 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Alert,
+  TouchableHighlight
 } from 'react-native';
 
 
@@ -22,19 +24,33 @@ var carouselTest = React.createClass({
     var layout = e.nativeEvent.layout;
     this.setState({size: {width: layout.width, height: layout.height}});
   },
+
+  _handle:function(u){
+    this.props.navigator.push({
+       title:'test',
+       id:'webview',
+       params: {
+        url: u
+      }
+    })
+  },
+
+
   render: function() {
     return (
-      <View style={{flex: 0.5}} onLayout={this._onLayoutDidChange}>
-        <Carousel delay={2000} style={this.state.size}>
-            
-              <Image source={require('../images/demo11.jpg')} style={this.state.size}/>
-            
-            
-              <Image source={require('../images/demo12.jpg')} style={this.state.size}/>
-        
-            
-              <Image source={require('../images/demo13.jpg')} style={this.state.size}/>
-      
+      <View style={{flex: 0.5}} onLayout={this._onLayoutDidChange} >
+        <Carousel delay={2000} style={this.state.size} >
+            <TouchableHighlight onPress={this._handle.bind(this,'http://scorpionjay.github.io/ONE')} >
+              <Image source={require('../images/demo11.jpg')} style={this.state.size} />
+            </TouchableHighlight>
+
+            <TouchableHighlight onPress={ this._handle.bind(this,'http://scorpionjay.github.io/ONE/demo.html')} >
+              <Image source={require('../images/demo12.jpg')} style={this.state.size} />
+            </TouchableHighlight>
+
+            <TouchableHighlight onPress={ this._handle.bind(this,'http://scorpionjay.github.io/')} >
+              <Image source={require('../images/demo13.jpg')} style={this.state.size} />
+            </TouchableHighlight>
         </Carousel>
       </View>
     );
