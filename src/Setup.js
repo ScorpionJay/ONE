@@ -2,7 +2,7 @@
 * setup
 */
 import React , { Component } from 'react'
-import { Navigator } from 'react-native'
+import { Navigator ,Alert} from 'react-native'
 
 import Splash from './Splash'
 import Login from './Login'
@@ -26,8 +26,31 @@ import DynamicDetial from './post/DynamicDetial'
 
 import Webview from './common/Webview'
 
+import JPushModule from 'jpush-react-native';
 
 export default class Setup extends Component {
+
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {};
+  }
+
+  componentDidMount() {
+    JPushModule.initPush();
+    JPushModule.addReceiveCustomMsgListener((message) => {
+      this.setState({pushMsg: message});
+    });
+    JPushModule.addReceiveNotificationListener((message) => {
+      console.log("receive notification: " + message);
+    })
+  }
+
+  componentWillUnmount() {
+    JPushModule.removeReceiveCustomMsgListener();
+    JPushModule.removeReceiveNotificationListener();
+  }
 
   _renderScene(route, navigator){
     switch(route.id){
