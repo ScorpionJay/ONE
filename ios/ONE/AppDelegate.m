@@ -8,7 +8,7 @@
  */
 
 #import "AppDelegate.h"
-#import <RCTJPushModule.h>
+#import <RCTJPushModule.h>
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
