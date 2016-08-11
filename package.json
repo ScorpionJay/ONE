@@ -6,8 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react": "15.1.0",
-    "react-native": "0.28.0",
+    "react": "15.2.1",
+    "react-native": "0.31.0",
     "react-native-device-info": "^0.9.3",
     "react-native-gifted-listview": "0.0.15",
     "react-native-image-picker": "^0.19.7",

@@ -67,7 +67,6 @@ import com.android.build.OutputFile
 
 apply from: "../../node_modules/react-native/react.gradle"
 
-
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -81,7 +80,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = true
+def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
@@ -105,22 +104,12 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-     release {
-         storeFile file(MYAPP_RELEASE_STORE_FILE)
-         storePassword MYAPP_RELEASE_STORE_PASSWORD
-         keyAlias MYAPP_RELEASE_KEY_ALIAS
-         keyPassword MYAPP_RELEASE_KEY_PASSWORD
-      }
-    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
         }
     }
-
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -137,13 +126,12 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-device-info')
     compile project(':react-native-vector-icons')
+    compile project(':react-native-image-picker')
+    compile project(':react-native-device-info')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
-    compile "com.facebook.react:react-native:+" 
-    compile project(':react-native-image-picker')
-    compile project(':react-native-vector-icons')
+    compile "com.facebook.react:react-native:+"  // From node_modules
 }
 
 // Run this once to be able to run the application with BUCK
