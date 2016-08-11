@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+#import <RCTJPushModule.h>
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -16,6 +17,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+    [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                      UIUserNotificationTypeSound |
+                                                      UIUserNotificationTypeAlert)
+                                          categories:nil];
+  } else {
+    [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                      UIRemoteNotificationTypeSound |
+                                                      UIRemoteNotificationTypeAlert)
+                                          categories:nil];
+  }
+  
+  [JPUSHService setupWithOption:launchOptions appKey:@"3776b77c53a717ff1f049cec"
+                        channel:nil apsForProduction:nil];
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -34,4 +49,8 @@
   return YES;
 }
 
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+[JPUSHService registerDeviceToken:deviceToken];
+}
 @end

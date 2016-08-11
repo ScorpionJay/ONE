@@ -33,6 +33,7 @@
 		747D7666FF164B2CBE486DE9 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98AD0F2D027448838E94117F /* MaterialIcons.ttf */; };
 		2EDE3175676E478EBF2E884E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B57C7C79E7A49E88C1DBF97 /* Octicons.ttf */; };
 		9A1B992406C6467BA0CCA8AE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18BD9A47D0994B73AD39A23F /* Zocial.ttf */; };
+		BAFB92CB5018445291D40029 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F169EE4476CF4E71843584F2 /* libRCTJPushModule.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,8 @@
 		98AD0F2D027448838E94117F /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3B57C7C79E7A49E88C1DBF97 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		18BD9A47D0994B73AD39A23F /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		173B150AF06F440DBAA4A171 /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; name = "RCTJPushModule.xcodeproj"; path = "../node_modules/jpush-react-native/ios/RCTJPushModule/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F169EE4476CF4E71843584F2 /* libRCTJPushModule.a */ = {isa = PBXFileReference; name = "libRCTJPushModule.a"; path = "libRCTJPushModule.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,7 @@
 				F376F271B7764330AB4B94DC /* libRNDeviceInfo.a in Frameworks */,
 				0B18324FFFD746B88C5ABA42 /* libRNImagePicker.a in Frameworks */,
 				AEBB0AC85C3C4DFCB7CDC511 /* libRNVectorIcons.a in Frameworks */,
+				BAFB92CB5018445291D40029 /* libRCTJPushModule.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +308,7 @@
 				4C3BD24BAB8341F69D30D201 /* RNDeviceInfo.xcodeproj */,
 				11219560F04142D1996B240F /* RNImagePicker.xcodeproj */,
 				C553EA20B8C84B0A8E9BABE7 /* RNVectorIcons.xcodeproj */,
+				173B150AF06F440DBAA4A171 /* RCTJPushModule.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -646,6 +651,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -665,6 +671,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;
@@ -681,10 +688,68 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule\RCTJPushModule",
 				);
 				INFOPLIST_FILE = "ONE/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
+						"-framework",
+						Adsupport,
+						"-framework",
+						Security,
+						"-framework",
+						UIKit,
+						"-framework",
+						Foundation,
+						"-framework",
+						CoreGraphics,
+						"-framework",
+						SystemConfiguration,
+						"-framework",
+						CoreTelephony,
+						"-framework",
+						CoreFoundation,
+						"-framework",
+						CFNetwork,
+						"-lz",
+						"-framework",
+						Adsupport,
+						"-framework",
+						Security,
+						"-framework",
+						UIKit,
+						"-framework",
+						Foundation,
+						"-framework",
+						CoreGraphics,
+						"-framework",
+						SystemConfiguration,
+						"-framework",
+						CoreTelephony,
+						"-framework",
+						CoreFoundation,
+						"-framework",
+						CFNetwork,
+						"-lz",
+						"-framework",
+						Adsupport,
+						"-framework",
+						Security,
+						"-framework",
+						UIKit,
+						"-framework",
+						Foundation,
+						"-framework",
+						CoreGraphics,
+						"-framework",
+						SystemConfiguration,
+						"-framework",
+						CoreTelephony,
+						"-framework",
+						CoreFoundation,
+						"-framework",
+						CFNetwork,
+						"-lz",
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
@@ -704,10 +769,68 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule\RCTJPushModule",
 				);
 				INFOPLIST_FILE = "ONE/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
+						"-framework",
+						Adsupport,
+						"-framework",
+						Security,
+						"-framework",
+						UIKit,
+						"-framework",
+						Foundation,
+						"-framework",
+						CoreGraphics,
+						"-framework",
+						SystemConfiguration,
+						"-framework",
+						CoreTelephony,
+						"-framework",
+						CoreFoundation,
+						"-framework",
+						CFNetwork,
+						"-lz",
+						"-framework",
+						Adsupport,
+						"-framework",
+						Security,
+						"-framework",
+						UIKit,
+						"-framework",
+						Foundation,
+						"-framework",
+						CoreGraphics,
+						"-framework",
+						SystemConfiguration,
+						"-framework",
+						CoreTelephony,
+						"-framework",
+						CoreFoundation,
+						"-framework",
+						CFNetwork,
+						"-lz",
+						"-framework",
+						Adsupport,
+						"-framework",
+						Security,
+						"-framework",
+						UIKit,
+						"-framework",
+						Foundation,
+						"-framework",
+						CoreGraphics,
+						"-framework",
+						SystemConfiguration,
+						"-framework",
+						CoreTelephony,
+						"-framework",
+						CoreFoundation,
+						"-framework",
+						CFNetwork,
+						"-lz",
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
@@ -757,6 +880,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule\RCTJPushModule",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -800,6 +924,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule\RCTJPushModule",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

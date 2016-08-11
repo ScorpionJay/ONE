@@ -126,6 +126,7 @@ android {
 }
 
 dependencies {
+    compile project(':jpush-react-native')
     compile project(':react-native-vector-icons')
     compile project(':react-native-image-picker')
     compile project(':react-native-device-info')

@@ -15,8 +15,12 @@ import java.util.List;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import cn.jpush.reactnativejpush.JPushPackage;
 
 public class MainApplication extends Application implements ReactApplication {
+
+  private boolean SHUTDOWN_TOAST = false;
+  private boolean SHUTDOWN_LOG = false;
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -30,7 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new VectorIconsPackage(),
           new RNDeviceInfo(),
-          new ImagePickerPackage()
+          new ImagePickerPackage(),
+          new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG)
       );
     }
   };
