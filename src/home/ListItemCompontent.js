@@ -11,6 +11,8 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import Spinner from 'react-native-loading-spinner-overlay';
+
 export default class ListItemCompontent extends Component{
 
 	constructor(props) {
