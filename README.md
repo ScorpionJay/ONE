@@ -35,6 +35,9 @@ cd android
 gradlew assembleRelease
 
 
+## 2016-8-26 使用redux重构代码
+
+npm install react-redux react-thunk redux-logger --save
 
 
 
