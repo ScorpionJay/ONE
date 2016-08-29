@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Alert,
   ScrollView
 } from 'react-native';
 
 import Item from './ListItemCompontent'
-
-
-
 import Spinner from 'react-native-loading-spinner-overlay'
 
 export default class ListCompontent extends Component{
@@ -22,15 +15,7 @@ export default class ListCompontent extends Component{
 	  this.state = {
 		visible:true
 	  };
-
 	}
-
-	
-	  // 组件挂载完成时执行
-	  componentDidMount() {
-	   // this.setState({data:this.props.listData})
-
-	  }
 
 	render() {
 		//<Spinner visible={this.state.visible} /> 
@@ -50,7 +35,5 @@ export default class ListCompontent extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
-
-});
+})

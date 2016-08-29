@@ -13,3 +13,12 @@ export const HIDE_ERROR = 'HIDE_ERROR'
 // home
 export const FETCH_LIST = 'FETCH_LIST'
 export const FETCH_LIST_ITEM = 'FETCH_LIST_ITEM'
+
+// login
+export const LOGIN = 'LOGIN'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+
+// me
+export const FETCH_ME = 'FETCH_ME'
+
+

@@ -5,7 +5,7 @@ import React , { Component } from 'react'
 import { Navigator ,Alert} from 'react-native'
 
 import Splash from './Splash'
-import Login from './Login'
+import Login from './containers/Login'
 import Main from './Main'
 import Register from './Register'
 

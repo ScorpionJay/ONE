@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
-  Alert,
   ScrollView
 } from 'react-native';
 
@@ -17,11 +14,6 @@ import { connect } from 'react-redux'
 import { fetchList,fetchListItem } from '../../actions/home'
 
 class App extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
   componentDidMount(){
     const { dispatch } = this.props

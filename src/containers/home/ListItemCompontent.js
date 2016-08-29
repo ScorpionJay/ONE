@@ -15,12 +15,6 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class ListItemCompontent extends Component{
 
-	constructor(props) {
-	  super(props);
-	  this.state = {
-	  };
-	}
-
 	handler(item_data){
 		const {navigator,router} = this.props
 		navigator.push({
@@ -30,7 +24,6 @@ export default class ListItemCompontent extends Component{
                id: this.props.data.id
            }
 		})
-		
 	}
 
 	render() {
@@ -82,6 +75,5 @@ const styles = StyleSheet.create({
 	},
 	descTitle:{
 		fontSize:25,
-
 	}
 })
