@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator'
 
-import Home from './home/Home'
+import Home from './containers/home/Home'
 import Find from './find/Find'
 import Me from './me/Me'
 import Config from './Config'

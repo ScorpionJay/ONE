@@ -23,22 +23,14 @@ export default class ListItemCompontent extends Component{
 
 	handler(item_data){
 		const {navigator,router} = this.props
-		//navigator.push({
-		//	title:'文章',
-		//	id:'newsList',
-		//	params: {
-         //       id: this.props.data.id
-         //   }
-		//})
 		navigator.push({
-				title:'文章',
-				id:'menuDetial',
-				params:{
-					name:item_data.name,
-					description:item_data.description
-				},
-			}
-		);
+			title:'文章',
+			id:'detail',
+			params: {
+               id: this.props.data.id
+           }
+		})
+		
 	}
 
 	render() {

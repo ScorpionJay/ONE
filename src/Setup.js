@@ -1,130 +1,23 @@
-/**
-* setup
-*/
-import React , { Component } from 'react'
-import { Navigator ,Alert} from 'react-native'
-
-import Splash from './Splash'
-import Login from './Login'
-import Main from './Main'
-import Register from './Register'
-
-import Home from './home/Home'
-import NewsList from './home/NewsList'
-import Detail from './home/Detail'
-import Third from './home/Third'
-import MenuDetial from './home/MenuDetial'
-
-import Me from './me/Me'
-import Account from './me/Account'
-import Setting from './me/Setting'
-import About from './me/About'
-
-import Post from './post/Post'
-import Posts from './post/Posts'
-import DynamicDetial from './post/DynamicDetial'
-
-import Webview from './common/Webview'
-
-import JPushModule from 'jpush-react-native';
+import React, {Component} from 'react'
+import { Provider } from 'react-redux'
+import Navigator from './Navigator'
+import configureStore from './store'
 
 export default class Setup extends Component {
 
-
-  constructor(props) {
-    super(props);
-  
-    this.state = {};
-  }
-
-  componentDidMount() {
-    JPushModule.initPush();
-    JPushModule.addReceiveCustomMsgListener((message) => {
-      this.setState({pushMsg: message});
-    });
-    JPushModule.addReceiveNotificationListener((message) => {
-      console.log("receive notification: " + message);
-    })
-  }
-
-  componentWillUnmount() {
-    JPushModule.removeReceiveCustomMsgListener();
-    JPushModule.removeReceiveNotificationListener();
-  }
-
-  _renderScene(route, navigator){
-    switch(route.id){
-      case 'splash':
-            return <Splash navigator={navigator} route={route}/>
-            break;
-      case 'login':
-            return <Login navigator={navigator} route={route}/>
-            break;
-      case 'register':
-            return <Register navigator={navigator} route={route}/>
-            break;
-      case 'main':
-            return <Main navigator={navigator} route={route}/>
-            break;
-
-      // home
-      case 'home':
-            return <Home navigator={navigator} route={route}/>
-            break;
-      case 'newsList':
-            return <NewsList navigator={navigator} route={route}/>
-            break;
-      case  'detail':
-            return <Detail navigator={navigator} route={route}/>
-            break;
-      case  'third':
-            return <Third navigator={navigator} route={route}/>
-            break;
-      case  'menuDetial':
-            return <MenuDetial navigator={navigator} route={route}/>
-            break
-
-      // me
-      case  'me':
-            return <Me navigator={navigator} route={route}/>
-            break;
-      case  'account':
-            return <Account navigator={navigator} route={route}/>
-            break;
-      case  'about':
-            return <About navigator={navigator} route={route}/>
-            break;
-      case  'setting':
-            return <Setting navigator={navigator} route={route}/>
-            break;
-
-      case  'post':
-            return <Post navigator={navigator} route={route}/>
-            break;
-      case  'posts':
-            return <Posts navigator={navigator} route={route}/>
-            break;
-      case  'CreateDynamic':
-            return <CreateDynamic navigator={navigator} route={route}/>
-            break
-      case 'dynamicDetail':
-            return <DynamicDetial navigator={navigator} route={route}/>
-            break
-
-
-      case 'webview':
-            return <Webview navigator={navigator} route={route}/>
-            break
+  constructor() {
+    super();
+    this.state = {
+      store: configureStore()
     }
   }
+  
   render() {
-    return (
-        <Navigator
-            initialRoute={{ title: '欢迎页', id:'splash'}}
-            renderScene={this._renderScene}
-        />      
-    );
+     return (
+        <Provider store={this.state.store}>
+          <Navigator/>
+        </Provider>
+      );
   }
+
 }
-
-

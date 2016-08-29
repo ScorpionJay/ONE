@@ -9,15 +9,23 @@ import {
   ScrollView
 } from 'react-native';
 
-import ToolBar from '../common/ToolBar'
-import CarouselCompont from '../common/RNCarousel'
+import ToolBar from '../../common/ToolBar'
+import CarouselCompont from '../../common/RNCarousel'
 import ListCompontent from './ListCompontent'
 
-export default class First extends Component {
+import { connect } from 'react-redux'
+import { fetchList,fetchListItem } from '../../actions/home'
+
+class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount(){
+    const { dispatch } = this.props
+    dispatch(fetchList())
   }
   
   render() {
@@ -26,7 +34,7 @@ export default class First extends Component {
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <CarouselCompont navigator={this.props.navigator} route={this.props.route}/>
           <ScrollView>
-            <ListCompontent navigator={this.props.navigator} route={this.props.route}/>
+            <ListCompontent navigator={this.props.navigator} route={this.props.route} listData={this.props.data}/>
           </ScrollView>
       </View>
     );
@@ -39,3 +47,11 @@ const styles = StyleSheet.create({
   },
 });
 
+
+function map(state) {
+  return {
+    data: state.home.fetchList
+  }
+}
+
+export default connect(map)(App)
