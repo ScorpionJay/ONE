@@ -1,17 +1,13 @@
-/**
-* setup
-*/
 import React , { Component } from 'react'
-import { Navigator ,Alert} from 'react-native'
+import { Navigator,View } from 'react-native'
 
-import Splash from './Splash'
+import Splash from './containers/Splash'
 import Login from './containers/Login'
 import Main from './Main'
 import Register from './Register'
 
 import Home from './containers/home/Home'
 import Detail from './containers/home/Detail'
-
 
 import Me from './me/Me'
 import Account from './me/Account'
@@ -111,9 +107,10 @@ export default class Setup extends Component {
         <Navigator
             initialRoute={{ title: '欢迎页', id:'splash'}}
             renderScene={this._renderScene}
-        />      
+        />    
     );
   }
 }
+
 
 

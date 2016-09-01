@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux'
-import { LOGIN,LOGIN_ERROR } from '../actions/login'
+import {LOGIN} from '../ConstantsAction'
 
 function login(state = '', action) {
   switch (action.type) {
     case LOGIN:
       return action.token
-    case LOGIN_ERROR:
-      return action.text
     default:
       return state
   }

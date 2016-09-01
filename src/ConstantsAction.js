@@ -16,9 +16,13 @@ export const FETCH_LIST_ITEM = 'FETCH_LIST_ITEM'
 
 // login
 export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 
 // me
 export const FETCH_ME = 'FETCH_ME'
 
+// message
+export const SHOW_MESSAGE = 'SHOW_MESSAGE'
+export const HIDE_MESSAGE = 'HIDE_MESSAGE'
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Provider } from 'react-redux'
-import Navigator from './Navigator'
+import OneApp from './OneApp'
 import configureStore from './store'
 
 export default class Setup extends Component {
@@ -15,9 +15,9 @@ export default class Setup extends Component {
   render() {
      return (
         <Provider store={this.state.store}>
-          <Navigator/>
+          <OneApp/>
         </Provider>
-      );
+      )
   }
-
+  
 }

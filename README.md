@@ -39,5 +39,8 @@ gradlew assembleRelease
 
 npm install react-redux react-thunk redux-logger --save
 
+添加redux-persist持久化
+
+
 
 

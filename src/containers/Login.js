@@ -59,7 +59,7 @@ class App extends Component {
       // 需要判断是否联网 https://facebook.github.io/react-native/docs/netinfo.html
       NetInfo.fetch().done((reach) => {
         console.log('Initial: ' + reach);
-        ToastAndroid.show('使用的网络' + reach, ToastAndroid.SHORT)
+        //ToastAndroid.show('使用的网络' + reach, ToastAndroid.SHORT)
         if( reach.toUpperCase() === 'NONE' || reach.toUpperCase === 'UNKNOWN' ){
             ToastAndroid.show('没有网络', ToastAndroid.SHORT)
         }else{
@@ -168,7 +168,7 @@ class App extends Component {
 
 function map(state) {
   return {
-    login: state.login.login
+    token: state.login.login
   }
 }
 

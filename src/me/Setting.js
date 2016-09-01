@@ -12,7 +12,12 @@ import ToolBar from '../common/ToolBar'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Config from '../Config'
 
-export default class Tab extends Component {
+import { connect } from 'react-redux'
+
+
+import { logout } from '../actions/login'
+
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -27,9 +32,7 @@ export default class Tab extends Component {
 
   _logout(){
     // 调用后台
-    storage.remove({
-        key: 'loginState'
-    });
+    this.props.dispatch(logout())
     this.props.navigator.push({id:'main','title':'首页'})
   }
 
@@ -90,3 +93,10 @@ const styles = StyleSheet.create({
 
 });
 
+function map(state) {
+  return {
+    token: state.login.login
+  }
+}
+
+export default connect(map)(App)
