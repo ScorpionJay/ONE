@@ -1,4 +1,4 @@
-export const FETCH_USER = 'FETCH_USER'
+// export const FETCH_USER = 'FETCH_USER'
 export const FETCH_REPO = 'FETCH_REPO'
 export const FETCH_USER_STARGAZERS = 'FETCH_USER_STARGAZERS'
 export const FETCH_REPO_STARGAZERS = 'FETCH_REPO_STARGAZERS'
@@ -19,8 +19,8 @@ export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 
-// me
-export const FETCH_ME = 'FETCH_ME'
+// account
+export const FETCH_USER = 'FETCH_USER'
 
 // message
 export const SHOW_MESSAGE = 'SHOW_MESSAGE'

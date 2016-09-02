@@ -11,8 +11,8 @@ import {
 import TabNavigator from 'react-native-tab-navigator'
 
 import Home from './containers/home/Home'
-import Find from './find/Find'
-import Me from './me/Me'
+import Find from './containers/Find'
+import Me from './containers/me/Me'
 import Config from './Config'
 import Icon from 'react-native-vector-icons/FontAwesome';
 

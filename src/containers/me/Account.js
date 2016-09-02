@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import Setting from './About'
-import ToolBar from '../common/ToolBar'
+import ToolBar from '../../common/ToolBar'
 
 import ModalPicker from 'react-native-modal-picker'
 
@@ -27,7 +27,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import DeviceInfo from 'react-native-device-info'
 
-import Config from '../Config'
+import Config from '../../Config'
+import { connect } from 'react-redux'
+import { fetchAccount } from '../../actions/account'
 
 const data = [
     { key: 0, label: '男' },
@@ -60,7 +62,7 @@ const options = {
   }
 };
 
-export default class Me extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -80,16 +82,11 @@ export default class Me extends Component {
 
   componentDidMount() {
 
-      storage.load({
-        key: 'loginState',
-        autoSync: true,
-        syncInBackground: true
-        }).then(ret => {
-            console.log(ret.userid);
-            this.setState({username:ret.userid,token:ret.token})
-            this._fetch()
-          }).catch(err => {
-        })
+    const {navigator,login,dispatch} = this.props
+    if ( login.token !== '') {
+      this.setState({username:login.username,token:login.token})
+      dispatch(fetchAccount(login.username,login.token))
+    }
   }
 
   _fetch(){
@@ -217,7 +214,7 @@ export default class Me extends Component {
   }
 
   render() {
-    const {route} = this.props
+    const {route,account} = this.props
     return (
       <View style={styles.container}>
 
@@ -247,17 +244,17 @@ export default class Me extends Component {
 
             <View style={styles.item}>
                 <Text style={styles.item1}>帐号</Text>
-                <Text style={styles.item3}>{this.state.username}</Text>
+                <Text style={styles.item3}>{account.username}</Text>
             </View>
 
             <View style={styles.item}>
                 <Text style={styles.item1}>名字</Text>
-                <Text style={styles.item3}>{this.state.name}</Text>
+                <Text style={styles.item3}>{account.name}</Text>
             </View>
 
             <TouchableOpacity style={styles.item}  onPress={() => this.setState({ promptVisible: true })}>
                 <Text style={styles.item1}>签名</Text>
-                <Text style={styles.item3}>{this.state.sign}</Text>
+                <Text style={styles.item3}>{account.sign}</Text>
             </TouchableOpacity>
 
              <ModalPicker 
@@ -394,3 +391,11 @@ const styles = StyleSheet.create({
 });
 
 
+function map(state) {
+  return {
+    login: state.login.login,
+    account: state.account.account
+  }
+}
+
+export default connect(map)(App)

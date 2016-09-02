@@ -118,7 +118,7 @@ class App extends Component {
 
           <Image
               style={styles.style_image}
-              source={require('../../logo.png')}/>
+              source={require('../images/logo.png')}/>
 
           <View>
           <TextInput  placeholder='用户名' placeholderTextColor="#aaa"

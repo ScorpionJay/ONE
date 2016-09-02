@@ -14,8 +14,8 @@ import {
     Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import ToolBar from '../common/ToolBar'
-import Config from '../Config'
+import ToolBar from '../../common/ToolBar'
+import Config from '../../Config'
 export default class DynamicDetial extends Component{
     // 构造
     constructor(props) {

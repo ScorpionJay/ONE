@@ -20,7 +20,7 @@ class App extends Component {
 
   hanlder(){
     const {navigator,login} = this.props
-    if ( login !== '') {
+    if ( login.token !== '' && login.token) {
       navigator.replace({
             title: '首页',
             id: 'main'

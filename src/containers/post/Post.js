@@ -17,9 +17,9 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import ToolBar from '../common/ToolBar'
+import ToolBar from '../../common/ToolBar'
 
-import Config from '../Config'
+import Config from '../../Config'
 
 import ImagePicker from 'react-native-image-picker'
 

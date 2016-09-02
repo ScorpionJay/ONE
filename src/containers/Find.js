@@ -7,29 +7,24 @@ import {
   Platform,
   Alert,
   Image,
-  Styles,
-  ToastAndroid,
-  Dimensions
+  Styles,ToastAndroid,
 } from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
 var GiftedSpinner = require('react-native-gifted-spinner');
 
-var Lightbox = require('react-native-lightbox');
-
 import ToolBar from '../common/ToolBar2'
 import Config from '../Config'
+import { connect } from 'react-redux'
 // 禁掉黄色警告
 console.disableYellowBox = true;
 
-const WINDOW_HEIGHT = Dimensions.get('window').height / 2;
-
-export default class ListCompontent extends Component{
+class App extends Component{
 
   constructor(props) {
     super(props);
     this.state = {
-      token:null,
+      token:this.props.login.token,
       data:{
         time:'',
         id:null,
@@ -43,27 +38,6 @@ export default class ListCompontent extends Component{
   }
 
   componentDidMount() {
-
-    
-    storage.load({
-      key: 'loginState',
-      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
-      autoSync: true,
-      // syncInBackground(默认为true)意味着如果数据过期，
-      // 在调用同步方法的同时先返回已经过期的数据。
-      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
-      syncInBackground: true
-      }).then(ret => {
-        //如果找到数据，则在then方法中返回
-        console.log(ret.userid);
-        this.setState({username:ret.userid,token:ret.token})
-
-        this._fetch();
-      }).catch(err => {
-        //如果没有找到数据且没有同步方法，
-        //或者有其他异常，则在catch中返回
-        //console.warn(err);
-      })
   }
 
   /**
@@ -75,18 +49,9 @@ export default class ListCompontent extends Component{
    */
   _onFetch(page = 1, callback, options) {
    
-    let url = page ===1 ? Config.postListApi : Config.postListApi + '?date='+this.state.time 
-    let token  = null;
-    storage.load({
-      key: 'loginState',
-      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
-      autoSync: true,
-      // syncInBackground(默认为true)意味着如果数据过期，
-      // 在调用同步方法的同时先返回已经过期的数据。
-      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
-      syncInBackground: true
-      }).then(ret => {
-        token = ret.token
+    let url = page ===1 ? Config.postAll : Config.postAll + '?date='+this.state.time 
+    let token  = this.props.login.token;
+   
 
         fetch(url,{
             headers: {
@@ -119,11 +84,7 @@ export default class ListCompontent extends Component{
           })
           .done();
 
-      }).catch(err => {
-        //如果没有找到数据且没有同步方法，
-        //或者有其他异常，则在catch中返回
-        //console.warn(err);
-      })
+      
 
 
    
@@ -149,16 +110,10 @@ export default class ListCompontent extends Component{
    * @param {object} rowData Row data
    */
   _renderRowView(rowData) {
-
-
-
-
-
-    let source = rowData.source;
+    let source = rowData.picture;
     if(source==''||source==undefined){
       return (
           <View style={{flexDirection:'column'}}>
-
             <TouchableHighlight
                 style={customStyles.row}
                 underlayColor='#c8c7cc'
@@ -184,20 +139,19 @@ export default class ListCompontent extends Component{
       let imageURL = Config.fileUrl + source;
       return (
           <View style={{flexDirection:'column'}}>
-
             <TouchableHighlight
                 style={customStyles.row}
                 underlayColor='#c8c7cc'
                 onPress={this._onPress.bind(this,rowData)}
             >
               <View style={{border:1,flexDirection:'row'}}>
-              <Lightbox  activeProps={{ style:{height:WINDOW_HEIGHT},source:{uri:Config.fileUrl + source} }}>
+
                 <Image
-                    source={{uri:Config.thumbnailApi + source}}
+                    source={{uri:imageURL}}
                     style={[styles.thumbnail]}
                 />
-                 </Lightbox>
                 <View style={[styles.flex]}>
+                  <Text style={{fontSize: 15,marginTop:5,color:'red'}}>{rowData.name}</Text>
                   <Text style={{fontSize: 10,marginTop:5}}>{rowData.content}</Text>
                   <Text style={{fontSize: 10,marginTop:5}}>{rowData.time}</Text>
                 </View>
@@ -469,3 +423,10 @@ const styles = StyleSheet.create({
 
 });
 
+function map(state) {
+  return {
+    login: state.login.login
+  }
+}
+
+export default connect(map)(App)

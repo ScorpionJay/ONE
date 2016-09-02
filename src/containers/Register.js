@@ -9,8 +9,8 @@ import {
       ToastAndroid,
       TouchableHighlight
 } from 'react-native';
-import ToolBar from './common/ToolBar'
-import Config from './Config'
+import ToolBar from '../common/ToolBar'
+import Config from '../Config'
 
 export default class Register extends Component{
 
@@ -79,7 +79,7 @@ export default class Register extends Component{
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <Image
               style={styles.style_image}
-              source={require('../logo.png')}/>
+              source={require('../images/logo.png')}/>
 
           <View>
             <TextInput

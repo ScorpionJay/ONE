@@ -4,19 +4,19 @@ import { Navigator,View } from 'react-native'
 import Splash from './containers/Splash'
 import Login from './containers/Login'
 import Main from './Main'
-import Register from './Register'
+import Register from './containers/Register'
 
 import Home from './containers/home/Home'
 import Detail from './containers/home/Detail'
 
-import Me from './me/Me'
-import Account from './me/Account'
-import Setting from './me/Setting'
-import About from './me/About'
+import Me from './containers/me/Me'
+import Account from './containers/me/Account'
+import Setting from './containers/me/Setting'
+import About from './containers/me/About'
 
-import Post from './post/Post'
-import Posts from './post/Posts'
-import DynamicDetial from './post/DynamicDetial'
+import Post from './containers/post/Post'
+import Posts from './containers/post/Posts'
+import DynamicDetial from './containers/post/DynamicDetial'
 
 import Webview from './common/Webview'
 

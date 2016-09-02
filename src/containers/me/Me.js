@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -16,11 +15,14 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Setting from './About'
-import ToolBar from '../common/ToolBar'
+import ToolBar from '../../common/ToolBar'
 
-import Config from '../Config'
+import Config from '../../Config'
 
-export default class Me extends Component {
+import { connect } from 'react-redux'
+import { fetchAccount } from '../../actions/account'
+
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -30,43 +32,33 @@ export default class Me extends Component {
       img:"test",
       token:null,
     };
+
   }
 
   componentDidMount() {
-
     
-    storage.load({
-      key: 'loginState',
-      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
-      autoSync: true,
-      // syncInBackground(默认为true)意味着如果数据过期，
-      // 在调用同步方法的同时先返回已经过期的数据。
-      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
-      syncInBackground: true
-      }).then(ret => {
-        //如果找到数据，则在then方法中返回
-        console.log(ret.userid);
-        this.setState({username:ret.userid,token:ret.token})
-
-        this._fetch();
-      }).catch(err => {
-        //如果没有找到数据且没有同步方法，
-        //或者有其他异常，则在catch中返回
-        //console.warn(err);
-      })
+    const {navigator,login,dispatch} = this.props
+    
+    if ( login.token !== '') {
+      this.setState({username:login.username,token:login.token})
+      dispatch(fetchAccount(login.username,login.token))
+      // this._fetch(login.username,login.token)
+    }
+    
+  
   }
 
   
-  _fetch(){
-    const {username} = this.state
-    fetch(Config.accountUrl + '/' +username,{
+  _fetch(username,token){
+    Alert.alert('tt',username + token)
+    fetch(Config.accountUrl + '/'+username ,{
         headers: {
-          'Auth-Token': this.state.token,
+          'Auth-Token': token,
         },
       })
       .then((response) => response.json())
       .then((responseData) => {
-           // Alert.alert('',JSON.stringify(responseData));
+            //Alert.alert('',JSON.stringify(responseData));
 
            if(responseData.status === 401){
               // token过期 重新登录
@@ -75,15 +67,15 @@ export default class Me extends Component {
               // 删除本地的
 
 
-              this.props.navigator.push(
-                {
-                  id:'login',
-                  title:'登录',
-                  params: {
-                    username: username
-                  }
-                }
-              )
+              // this.props.navigator.push(
+              //   {
+              //     id:'login',
+              //     title:'登录',
+              //     params: {
+              //       username: username
+              //     }
+              //   }
+              // )
            }
 
            if(responseData.code === 0){
@@ -365,3 +357,11 @@ const styles = StyleSheet.create({
 });
 
 
+function map(state) {
+  return {
+    login: state.login.login,
+    account: state.account.account
+  }
+}
+
+export default connect(map)(App)

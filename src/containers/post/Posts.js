@@ -7,16 +7,22 @@ import {
   Platform,
   Alert,
   Image,
-  Styles,ToastAndroid,
+  Styles,
+  ToastAndroid,
+  Dimensions
 } from 'react-native';
 
 var GiftedListView = require('react-native-gifted-listview');
 var GiftedSpinner = require('react-native-gifted-spinner');
 
-import ToolBar from '../common/ToolBar2'
-import Config from '../Config'
+var Lightbox = require('react-native-lightbox');
+
+import ToolBar from '../../common/ToolBar2'
+import Config from '../../Config'
 // 禁掉黄色警告
 console.disableYellowBox = true;
+
+const WINDOW_HEIGHT = Dimensions.get('window').height / 2;
 
 export default class ListCompontent extends Component{
 
@@ -69,7 +75,7 @@ export default class ListCompontent extends Component{
    */
   _onFetch(page = 1, callback, options) {
    
-    let url = page ===1 ? Config.postAll : Config.postAll + '?date='+this.state.time 
+    let url = page ===1 ? Config.postListApi : Config.postListApi + '?date='+this.state.time 
     let token  = null;
     storage.load({
       key: 'loginState',
@@ -143,10 +149,16 @@ export default class ListCompontent extends Component{
    * @param {object} rowData Row data
    */
   _renderRowView(rowData) {
-    let source = rowData.picture;
+
+
+
+
+
+    let source = rowData.source;
     if(source==''||source==undefined){
       return (
           <View style={{flexDirection:'column'}}>
+
             <TouchableHighlight
                 style={customStyles.row}
                 underlayColor='#c8c7cc'
@@ -172,19 +184,20 @@ export default class ListCompontent extends Component{
       let imageURL = Config.fileUrl + source;
       return (
           <View style={{flexDirection:'column'}}>
+
             <TouchableHighlight
                 style={customStyles.row}
                 underlayColor='#c8c7cc'
                 onPress={this._onPress.bind(this,rowData)}
             >
               <View style={{border:1,flexDirection:'row'}}>
-
+              <Lightbox  activeProps={{ style:{height:WINDOW_HEIGHT},source:{uri:Config.fileUrl + source} }}>
                 <Image
-                    source={{uri:imageURL}}
+                    source={{uri:Config.thumbnailApi + source}}
                     style={[styles.thumbnail]}
                 />
+                 </Lightbox>
                 <View style={[styles.flex]}>
-                  <Text style={{fontSize: 15,marginTop:5,color:'red'}}>{rowData.name}</Text>
                   <Text style={{fontSize: 10,marginTop:5}}>{rowData.content}</Text>
                   <Text style={{fontSize: 10,marginTop:5}}>{rowData.time}</Text>
                 </View>

@@ -8,14 +8,14 @@ import {
   Image
 } from 'react-native';
 
-import ToolBar from '../common/ToolBar'
+import ToolBar from '../../common/ToolBar'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Config from '../Config'
+import Config from '../../Config'
 
 import { connect } from 'react-redux'
 
 
-import { logout } from '../actions/login'
+import { logout } from '../../actions/login'
 
 class App extends Component {
 

@@ -13,7 +13,7 @@ import {
   WebView
 } from 'react-native';
 
-import ToolBar from '../common/ToolBar'
+import ToolBar from '../../common/ToolBar'
 
 export default class About extends Component {
 
@@ -27,7 +27,6 @@ export default class About extends Component {
       <View style={styles.container}>
           <ToolBar navigator={this.props.navigator} route={this.props.route}/>
           <WebView source={{uri: 'http://scorpionjay.github.io/about/'}} style={styles.webView}/>
-
       </View>
     );
   }

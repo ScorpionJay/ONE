@@ -14,7 +14,7 @@ export function fetchLogin(username,password,redirect){
         .then((response) => {
               const authToken = response.headers.get("Auth-Token");
                if(authToken){
-	               dispatch(login(authToken))
+	               dispatch(login(username,authToken))
 	               // 页面跳转
 	               if (redirect) redirect()
                }else{
@@ -36,8 +36,8 @@ export function logout(){
   }
 }
 
-export function login(token){
+export function login(username,token){
 	return {
-		type:LOGIN,token
+		type:LOGIN,username,token
 	}
 }

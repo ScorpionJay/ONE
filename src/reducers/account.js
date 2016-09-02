@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux'
-import {LOGIN} from '../ConstantsAction'
+import {FETCH_USER} from '../ConstantsAction'
 
-function login(state = {}, action) {
+function account(state = {}, action) {
   switch (action.type) {
-    case LOGIN:
-      return {username:action.username,token:action.token}
+    case FETCH_USER:
+      return action.data
     default:
       return state
   }
 }
 
 const Reducers = combineReducers({
-  login
+  account
 })
 
 export default Reducers
