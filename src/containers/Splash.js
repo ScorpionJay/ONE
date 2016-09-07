@@ -20,6 +20,7 @@ class App extends Component {
 
   hanlder(){
     const {navigator,login} = this.props
+    // 判断登录
     if ( login.token !== '' && login.token) {
       navigator.replace({
             title: '首页',
@@ -31,6 +32,11 @@ class App extends Component {
           title: '登录'
         })
     }
+
+    // navigator.replace({
+    //         title: '首页',
+    //         id: 'main'
+    //       })
       
   }
 
@@ -38,7 +44,7 @@ class App extends Component {
     return (
       <TouchableOpacity onPress={this.hanlder.bind(this)} style={styles.container} >
          <Image
-          source={require("../images/demo12.jpg")}
+          source={require("../images/way.jpg")}
           style={styles.img}
         />
 

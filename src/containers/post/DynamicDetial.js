@@ -70,10 +70,7 @@ export default class DynamicDetial extends Component{
                         underlayColor='#c8c7cc'
                       >
                         <View style={{border:1,flexDirection:'row'}}>
-                            <Image
-                                source={require('../images/ic_img_loading.png')}
-                                style={[styles.thumbnail]}
-                            />
+                            
                             <View style={[styles.flex]}>
                                 <Text style={{fontSize: 10,marginTop:5}}>动态内容: {content}</Text>
                                 <Text style={{fontSize: 10,marginTop:5}}>时间: {time}</Text>

@@ -23,6 +23,8 @@ import Config from '../../Config'
 
 import ImagePicker from 'react-native-image-picker'
 
+import { connect } from 'react-redux'
+
 const options = {
   title: '选择照片', // specify null or empty string to remove the title
   cancelButtonTitle: '取消',
@@ -47,13 +49,13 @@ const options = {
 };
 
 
-export default class Post extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      token:null,
+       token:this.props.login.token,
       content:'',
       picture:'',
       pic:null,
@@ -62,24 +64,6 @@ export default class Post extends Component {
 
   componentDidMount() {
 
-    
-    storage.load({
-      key: 'loginState',
-      // autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
-      autoSync: true,
-      // syncInBackground(默认为true)意味着如果数据过期，
-      // 在调用同步方法的同时先返回已经过期的数据。
-      // 设置为false的话，则始终强制返回同步方法提供的最新数据(当然会需要更多等待时间)。
-      syncInBackground: true
-      }).then(ret => {
-        //如果找到数据，则在then方法中返回
-        console.log(ret.userid);
-        this.setState({token:ret.token})
-      }).catch(err => {
-        //如果没有找到数据且没有同步方法，
-        //或者有其他异常，则在catch中返回
-        //console.warn(err);
-      })
   }
 
   post(){
@@ -344,4 +328,10 @@ const styles = StyleSheet.create({
 
 });
 
+function map(state) {
+  return {
+    login: state.login.login
+  }
+}
 
+export default connect(map)(App)

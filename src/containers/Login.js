@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import ToolBar from '../common/ToolBar'
-import Main from '../Main'
+import Main from './Main'
 import Config from '../Config'
 
 import { connect } from 'react-redux'

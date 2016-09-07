@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import { Provider } from 'react-redux'
-import OneApp from './OneApp'
+
+import App from './App'
 import configureStore from './store'
+import JPushModule from 'jpush-react-native'
 
 export default class Setup extends Component {
 
@@ -11,11 +13,26 @@ export default class Setup extends Component {
       store: configureStore()
     }
   }
+
+  componentDidMount() {
+    JPushModule.initPush();
+    JPushModule.addReceiveCustomMsgListener((message) => {
+      this.setState({pushMsg: message});
+    });
+    JPushModule.addReceiveNotificationListener((message) => {
+      console.log("receive notification: " + message);
+    })
+  }
+
+  componentWillUnmount() {
+    JPushModule.removeReceiveCustomMsgListener();
+    JPushModule.removeReceiveNotificationListener();
+  }
   
   render() {
      return (
         <Provider store={this.state.store}>
-          <OneApp/>
+          <App/>
         </Provider>
       )
   }

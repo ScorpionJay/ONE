@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import {FETCH_LIST,FETCH_LIST_ITEM} from '../ConstantsAction'
+import {FETCH_LIST,FETCH_LIST_ITEM} from '../actions/Actions'
 
 function fetchList(state = [], action) {
   switch (action.type) {

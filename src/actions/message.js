@@ -1,4 +1,4 @@
-import * as Actions from '../ConstantsAction'
+import * as Actions from './Actions'
 
 export function showMessage(text){
 	return {

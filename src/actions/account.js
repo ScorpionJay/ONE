@@ -1,4 +1,4 @@
-import {FETCH_USER} from '../ConstantsAction'
+import {FETCH_USER} from './Actions'
 import Config from '../Config'
 import {showMessage} from './message'
 

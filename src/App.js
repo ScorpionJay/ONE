@@ -2,9 +2,8 @@ import React , { Component } from 'react'
 import { View,Text,StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
 
-import OneNavigator from './OneNavigator'
+import Navigator from './Navigator'
 import Message from './components/Message'
-
 import { hideMessage } from './actions/message'
 
 class App extends Component {
@@ -14,7 +13,7 @@ class App extends Component {
 
     return (
         <View style={styles.container}>
-          <OneNavigator />
+          <Navigator />
           <Message style={styles.message} data={message} onHideMessage={()=>dispatch(hideMessage())}/>
         </View>
     );

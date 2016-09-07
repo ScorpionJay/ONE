@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import {FETCH_USER} from '../ConstantsAction'
+import {FETCH_USER} from '../actions/Actions'
 
 function account(state = {}, action) {
   switch (action.type) {

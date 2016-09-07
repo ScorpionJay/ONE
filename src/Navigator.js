@@ -3,47 +3,25 @@ import { Navigator,View } from 'react-native'
 
 import Splash from './containers/Splash'
 import Login from './containers/Login'
-import Main from './Main'
+import Main from './containers/Main'
 import Register from './containers/Register'
-
 import Home from './containers/home/Home'
 import Detail from './containers/home/Detail'
-
 import Me from './containers/me/Me'
 import Account from './containers/me/Account'
 import Setting from './containers/me/Setting'
 import About from './containers/me/About'
-
 import Post from './containers/post/Post'
 import Posts from './containers/post/Posts'
 import DynamicDetial from './containers/post/DynamicDetial'
-
 import Webview from './common/Webview'
 
-import JPushModule from 'jpush-react-native';
-
 export default class Setup extends Component {
-
 
   constructor(props) {
     super(props);
   
     this.state = {};
-  }
-
-  componentDidMount() {
-    JPushModule.initPush();
-    JPushModule.addReceiveCustomMsgListener((message) => {
-      this.setState({pushMsg: message});
-    });
-    JPushModule.addReceiveNotificationListener((message) => {
-      console.log("receive notification: " + message);
-    })
-  }
-
-  componentWillUnmount() {
-    JPushModule.removeReceiveCustomMsgListener();
-    JPushModule.removeReceiveNotificationListener();
   }
 
   _renderScene(route, navigator){

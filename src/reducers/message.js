@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import * as Actions from '../ConstantsAction'
+import * as Actions from '../actions/Actions'
 
 function message(state = {}, action) {
   switch (action.type) {

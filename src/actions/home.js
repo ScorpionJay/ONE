@@ -1,4 +1,4 @@
-import {FETCH_LIST,FETCH_LIST_ITEM} from '../ConstantsAction'
+import {FETCH_LIST,FETCH_LIST_ITEM} from './Actions'
 
 export function addTodo(text){
 	return {

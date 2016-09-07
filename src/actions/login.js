@@ -1,6 +1,8 @@
-import {LOGIN,LOGOUT} from '../ConstantsAction'
+import {LOGIN,LOGOUT} from './Actions'
 import Config from '../Config'
 import {showMessage} from './message'
+
+import {account} from './account'
 
 export function fetchLogin(username,password,redirect){
 	return dispatch => { 
@@ -12,9 +14,13 @@ export function fetchLogin(username,password,redirect){
           method: 'POST'
         })
         .then((response) => {
-              const authToken = response.headers.get("Auth-Token");
-               if(authToken){
-	               dispatch(login(username,authToken))
+              const token = response.headers.get("Auth-Token");
+               if(token){
+                let user = {
+                  username,
+                  token
+                }
+	               dispatch(login(user))
 	               // 页面跳转
 	               if (redirect) redirect()
                }else{
@@ -32,12 +38,13 @@ export function fetchLogin(username,password,redirect){
 
 export function logout(){
   return dispatch => { 
-    dispatch(login(''))
+    dispatch(login({}))
+     dispatch(account({}))
   }
 }
 
-export function login(username,token){
+export function login(user){
 	return {
-		type:LOGIN,username,token
+		type:LOGIN,user
 	}
 }

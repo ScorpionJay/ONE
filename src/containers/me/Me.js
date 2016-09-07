@@ -37,11 +37,12 @@ class App extends Component {
 
   componentDidMount() {
     
-    const {navigator,login,dispatch} = this.props
+    const {navigator,login,dispatch,account} = this.props
     
-    if ( login.token !== '') {
-      this.setState({username:login.username,token:login.token})
+    if ( login.token ) {
+      
       dispatch(fetchAccount(login.username,login.token))
+      this.setState({username:login.username,token:login.token,img:account.img})
       // this._fetch(login.username,login.token)
     }
     
@@ -146,6 +147,7 @@ class App extends Component {
 
     _renderScene(){
       if(this.state.username !== ''){
+
         return(
                     <View>
 
