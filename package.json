@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "jpush-react-native": "^1.1.3",
-    "react": "15.2.1",
-    "react-native": "0.31.0",
+    "react": "15.3.1",
+    "react-native": "0.33.0",
     "react-native-device-info": "^0.9.3",
     "react-native-gifted-listview": "0.0.15",
     "react-native-image-picker": "^0.19.7",
